@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/GodsBoss/ld54/pkg/game"
+	"github.com/GodsBoss/pineapple-burger-pizza/pkg/game"
 
 	"github.com/GodsBoss/gggg/v2/pkg/dom"
 	"github.com/GodsBoss/gggg/v2/pkg/dominit"

@@ -1,4 +1,4 @@
-module github.com/GodsBoss/ld54
+module github.com/GodsBoss/pineapple-burger-pizza
 
 go 1.21.1
 
