@@ -68,22 +68,7 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 
 		// Give pizza to customer.
 		if event.Key == "c" && keyboard.IsDownEvent(event) {
-			rating := d.customer.ratePizza(*d.pizza) + d.customer.forgiveness
-			if rating > 0 {
-				d.reputation++
-				if d.reputation > 10 {
-					d.reputation = 10
-				}
-			}
-			if rating < 0 { // Bad pizza.
-				d.reputation--
-			}
-			if rating < -5 { // Very bad pizza.
-				d.reputation--
-			}
-			if d.reputation < 0 {
-				d.reputation = 0
-			}
+			customerGetsPizza(d)
 		}
 
 		return game.SameState()
@@ -450,4 +435,23 @@ func (c customer) ratePizza(p pizza) int {
 	}
 
 	return rating
+}
+
+func customerGetsPizza(d *data) {
+	rating := d.customer.ratePizza(*d.pizza) + d.customer.forgiveness
+	if rating > 0 {
+		d.reputation++
+		if d.reputation > 10 {
+			d.reputation = 10
+		}
+	}
+	if rating < 0 { // Bad pizza.
+		d.reputation--
+	}
+	if rating < -5 { // Very bad pizza.
+		d.reputation--
+	}
+	if d.reputation < 0 {
+		d.reputation = 0
+	}
 }
