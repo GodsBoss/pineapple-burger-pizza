@@ -355,3 +355,25 @@ const (
 	ingredientClockwise        ingredientOrientation = 1
 	ingredientCounterClockwise ingredientOrientation = 3
 )
+
+type flavor string
+
+const (
+	flavorSweet    flavor = "sweet"
+	flavorCalamari flavor = "calamari"
+	flavorSalty    flavor = "salty"
+	flavorFish     flavor = "fish"
+)
+
+var ingredientFlavors = map[ingredientType]map[flavor]int{
+	ingredientAnanas: {
+		flavorSweet: 1,
+	},
+	ingredientAnchovi: {
+		flavorFish:  1,
+		flavorSalty: 1,
+	},
+	ingredientRubberBoots: {
+		flavorCalamari: 1,
+	},
+}
