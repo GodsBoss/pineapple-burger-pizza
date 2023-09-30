@@ -33,13 +33,13 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 
 		if event.Key == "r" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientClockwise) % 4
-			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields)
+			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, clockwise)
 			calculateIngredientTargetFields(d)
 		}
 
 		if event.Key == "R" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
-			d.draggedIngredient.fields = rotateFields(rotateFields(rotateFields(d.draggedIngredient.fields))) // Dirty hack! Use counter-clockwise rotation instead.
+			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, counterClockwise)
 			calculateIngredientTargetFields(d)
 		}
 
@@ -229,7 +229,7 @@ var ingredientFields = map[ingredientType][]vector2d.Vector[int]{
 
 // rotateFields rotates the given fields. Fields are left/top aligned. The left-most
 // fields always have an X coordinate of 0, the top-most fields have an Y coordinate of 0.
-func rotateFields(fields []vector2d.Vector[int]) []vector2d.Vector[int] {
+func rotateFields(fields []vector2d.Vector[int], rotate func(int, int) (int, int)) []vector2d.Vector[int] {
 	// smallestX and smallestY will be used to determine the offset the intermediate list needs to be shifted.
 	// As a list of fields has at least one field with X = 0 and at least one field with Y = 0, it is safe to
 	// assume that the smallest X and Y cannot be greater than 0.
@@ -240,7 +240,7 @@ func rotateFields(fields []vector2d.Vector[int]) []vector2d.Vector[int] {
 
 	for i := range fields {
 		// New coordinates.
-		x, y := fields[i].Y(), -fields[i].X()
+		x, y := rotate(fields[i].X(), fields[i].Y())
 
 		if x < smallestX {
 			smallestX = x
@@ -260,6 +260,16 @@ func rotateFields(fields []vector2d.Vector[int]) []vector2d.Vector[int] {
 	}
 
 	return result
+}
+
+// clockwise rotates x and y clockwise.
+func clockwise(x int, y int) (int, int) {
+	return y, -x
+}
+
+// counterClockwise rotates x and y counter-clockwise.
+func counterClockwise(x int, y int) (int, int) {
+	return -y, x
 }
 
 type draggedIngredient struct {
