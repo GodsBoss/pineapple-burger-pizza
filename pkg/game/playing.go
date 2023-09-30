@@ -65,6 +65,8 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 						orientation: d.draggedIngredient.orientation,
 						x:           d.draggedIngredient.x,
 						y:           d.draggedIngredient.y,
+						width:       d.draggedIngredient.Width(),
+						height:      d.draggedIngredient.Height(),
 					},
 				)
 				d.draggedIngredient = nil
@@ -381,6 +383,8 @@ type placedIngredient struct {
 	orientation ingredientOrientation
 	x           int
 	y           int
+	width       int
+	height      int
 }
 
 type flavor string

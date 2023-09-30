@@ -36,8 +36,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		}
 
 		for _, placed := range d.placedIngredients {
-			offsetX := -ingredientSizes[placed.typ].Width / 2
-			offsetY := -ingredientSizes[placed.typ].Height / 2
+			offsetX := -placed.width / 2
+			offsetY := -placed.height / 2
 
 			spriteMap.CreateSprite(
 				keys.ingredients[placed.typ][int(placed.orientation)],
