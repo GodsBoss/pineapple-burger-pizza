@@ -24,7 +24,7 @@ func initPlaying(d *data) game.NextState {
 			typ:    ingredientAnanas,
 			amount: 2,
 			x:      200,
-			y:      160,
+			y:      130,
 		},
 		{
 			typ:    ingredientRubberBoots,
