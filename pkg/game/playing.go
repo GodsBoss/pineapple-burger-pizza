@@ -95,12 +95,6 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 }
 
 func calculateIngredientTargetFields(d *data) {
-	for col := range d.pizza.grid {
-		for row := range d.pizza.grid[col] {
-			d.pizza.grid[col][row].draggedIngredientTarget = false
-		}
-	}
-
 	d.draggedIngredient.validFields = make([]vector2d.Vector[int], 0)
 	d.draggedIngredient.invalidFields = make([]vector2d.Vector[int], 0)
 
@@ -130,7 +124,6 @@ func calculateIngredientTargetFields(d *data) {
 			} else {
 				d.draggedIngredient.validFields = append(d.draggedIngredient.validFields, vector2d.Cartesian[int](fieldOffsetX, fieldOffsetY))
 			}
-			d.pizza.grid[fieldOffsetX][fieldOffsetY].draggedIngredientTarget = true
 		} else {
 			d.draggedIngredient.invalidFields = append(d.draggedIngredient.invalidFields, vector2d.Cartesian[int](fieldOffsetX, fieldOffsetY))
 		}
@@ -182,9 +175,6 @@ type pizzaField struct {
 
 	// occupied marks whether part of an ingredient occupies this field.
 	occupied bool
-
-	// draggedIngredientTarget is true if an ingredient's field is dragged over this field.
-	draggedIngredientTarget bool
 }
 
 // waitingIngredient is an ingredient waiting on the table.
