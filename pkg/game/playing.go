@@ -66,6 +66,9 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 				for _, field := range d.draggedIngredient.validFields {
 					d.pizza.grid[field.X()][field.Y()].occupied = true
 				}
+				for flavor, amount := range ingredientFlavors[d.draggedIngredient.typ] {
+					d.pizza.flavors[flavor] += amount
+				}
 				d.draggedIngredient = nil
 				return game.SameState()
 			}
@@ -165,12 +168,14 @@ func createPizza(diameter int) *pizza {
 	grid[max][max].invalid = true
 
 	return &pizza{
-		grid: grid,
+		grid:    grid,
+		flavors: make(map[flavor]int),
 	}
 }
 
 type pizza struct {
-	grid [][]pizzaField
+	grid    [][]pizzaField
+	flavors map[flavor]int
 }
 
 func (p pizza) Width() int {
