@@ -47,6 +47,16 @@ func TestLines(t *testing.T) {
 				"shooshoo",
 			},
 		},
+		"very long word": {
+			maxLineWidth: 5,
+			content:      "ThisIsAVeryLongWord",
+			expectedLines: []string{
+				"ThisI",
+				"sAVer",
+				"yLong",
+				"Word",
+			},
+		},
 	}
 
 	for name := range testcases {

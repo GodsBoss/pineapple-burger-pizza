@@ -7,7 +7,17 @@ func Lines(maxLineWidth int, content string) []string {
 		return make([]string, 0)
 	}
 
-	words := strings.Split(content, " ")
+	splitted := strings.Split(content, " ")
+
+	words := make([]string, 0)
+
+	for _, s := range splitted {
+		for len(s) > maxLineWidth {
+			words = append(words, s[:maxLineWidth])
+			s = s[maxLineWidth:]
+		}
+		words = append(words, s)
+	}
 
 	lines := make([]string, 0)
 	currentLine := ""
