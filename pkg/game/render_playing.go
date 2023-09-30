@@ -50,21 +50,19 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 
 		// Render laying ingredients
 		for _, ingredient := range d.waitingIngredients {
-			var key canvas2drendering.SpriteKey
 			var amountOffsetX int
 			var amountOffsetY int
 
+			key := keys.ingredients[ingredient.typ][0]
+
 			switch ingredient.typ {
 			case ingredientAnchovi:
-				key = keys.ingredientAnchovi[0]
 				amountOffsetX = 20
 				amountOffsetY = 20
 			case ingredientAnanas:
-				key = keys.ingredientAnanas[0]
 				amountOffsetX = 20
 				amountOffsetY = 30
 			case ingredientRubberBoots:
-				key = keys.ingredientRubberBoots[0]
 				amountOffsetX = 20
 				amountOffsetY = 25
 			}
@@ -98,19 +96,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			offsetX := -d.draggedIngredient.Width() / 2
 			offsetY := -d.draggedIngredient.Height() / 2
 
-			var key canvas2drendering.SpriteKey
-
-			switch d.draggedIngredient.typ {
-			case ingredientAnchovi:
-				key = keys.ingredientAnchovi[int(d.draggedIngredient.orientation)]
-			case ingredientAnanas:
-				key = keys.ingredientAnanas[int(d.draggedIngredient.orientation)]
-			case ingredientRubberBoots:
-				key = keys.ingredientRubberBoots[int(d.draggedIngredient.orientation)]
-			}
-
 			spriteMap.CreateSprite(
-				key,
+				keys.ingredients[d.draggedIngredient.typ][int(d.draggedIngredient.orientation)],
 				canvas2drendering.SpriteAttributes{},
 				(d.draggedIngredient.x+offsetX)*scale,
 				(d.draggedIngredient.y+offsetY)*scale,

@@ -10,7 +10,10 @@ import (
 
 func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, spriteKeys) {
 	spriteMap := canvas2drendering.NewSpriteMap(sourceImage)
-	keys := spriteKeys{}
+	keys := spriteKeys{
+		ingredients: make(map[ingredientType][4]r.SpriteKey),
+	}
+
 	addSprite := createAddSprite(spriteMap)
 
 	keys.backgroundTitle = addSprite("background_title")
@@ -25,9 +28,15 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 
 	addIngredientSprites := createAddIngredientSprites(spriteMap)
 
-	keys.ingredientAnchovi = addIngredientSprites("anchovy")
-	keys.ingredientAnanas = addIngredientSprites("ananas")
-	keys.ingredientRubberBoots = addIngredientSprites("rubber_boots")
+	ingredientKeys := []ingredientType{
+		ingredientAnanas,
+		ingredientAnchovi,
+		ingredientRubberBoots,
+	}
+
+	for _, ingredientKey := range ingredientKeys {
+		keys.ingredients[ingredientKey] = addIngredientSprites(string(ingredientKey))
+	}
 
 	return spriteMap, keys
 }
@@ -70,7 +79,5 @@ type spriteKeys struct {
 	ingredientGridOverlayFree     r.SpriteKey
 	ingredientGridOverlayOccupied r.SpriteKey
 
-	ingredientAnchovi     [4]r.SpriteKey
-	ingredientAnanas      [4]r.SpriteKey
-	ingredientRubberBoots [4]r.SpriteKey
+	ingredients map[ingredientType][4]r.SpriteKey
 }
