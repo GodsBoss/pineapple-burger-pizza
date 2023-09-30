@@ -26,6 +26,7 @@ func (r *renderer) SetOutput(ctx2d *dom.Context2D) {
 }
 
 func (r *renderer) Render(d *data) {
+	r.output.DisableImageSmoothing()
 	w, h := r.output.Size()
 	r.output.ClearRect(0, 0, w, h)
 	if sr, ok := r.stateRenderers[d.state]; ok {
