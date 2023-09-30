@@ -57,6 +57,13 @@ func TestLines(t *testing.T) {
 				"Word",
 			},
 		},
+		"blanks": {
+			maxLineWidth: 10,
+			content:      "xx   yy",
+			expectedLines: []string{
+				"xx   yy",
+			},
+		},
 	}
 
 	for name := range testcases {
