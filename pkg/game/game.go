@@ -33,14 +33,13 @@ func New(img *dom.Image) *Game {
 	instance, _ := tmpl.NewInstance()
 
 	r := &renderer{
-		scaler:    createScaler(),
-		spriteMap: spriteMap,
+		scaler: createScaler(),
 	}
 
 	r.
-		AddStateRenderer(titleState, stateRendererFunc(renderTitle())).
-		AddStateRenderer(playingState, stateRendererFunc(renderPlaying())).
-		AddStateRenderer(gameOverState, stateRendererFunc(renderGameOver()))
+		AddStateRenderer(titleState, stateRendererFunc(renderTitle(spriteMap))).
+		AddStateRenderer(playingState, stateRendererFunc(renderPlaying(spriteMap))).
+		AddStateRenderer(gameOverState, stateRendererFunc(renderGameOver(spriteMap)))
 
 	return &Game{
 		data:     instance,

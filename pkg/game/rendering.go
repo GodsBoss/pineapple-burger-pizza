@@ -2,13 +2,11 @@ package game
 
 import (
 	"github.com/GodsBoss/gggg/v2/pkg/dom"
-	"github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
 )
 
 type renderer struct {
-	scaler    scaler
-	output    *dom.Context2D
-	spriteMap canvas2drendering.SpriteMap
+	scaler scaler
+	output *dom.Context2D
 
 	stateRenderers map[string]stateRenderer
 }
