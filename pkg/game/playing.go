@@ -98,8 +98,20 @@ func calculateIngredientTargetFields(d *data) {
 	atLeastOneFieldInPizzaBounds := false
 
 	for _, field := range d.draggedIngredient.fields {
-		fieldOffsetX := (field.X()*pizzaFieldWidth + d.draggedIngredient.x - 160 + d.pizza.Width()*pizzaFieldWidth/2 - d.draggedIngredient.Width()/2 + pizzaFieldWidth/2) / pizzaFieldWidth
-		fieldOffsetY := (field.Y()*pizzaFieldHeight + d.draggedIngredient.y - 100 + d.pizza.Height()*pizzaFieldHeight/2 - d.draggedIngredient.Height()/2 + pizzaFieldHeight/2) / pizzaFieldHeight
+		fieldOffsetX := field.X()*pizzaFieldWidth + d.draggedIngredient.x - 160 + d.pizza.Width()*pizzaFieldWidth/2 - d.draggedIngredient.Width()/2 + pizzaFieldWidth/2
+		fieldOffsetY := field.Y()*pizzaFieldHeight + d.draggedIngredient.y - 100 + d.pizza.Height()*pizzaFieldHeight/2 - d.draggedIngredient.Height()/2 + pizzaFieldHeight/2
+
+		// We need to shift the result for negative results, because rounding has a bias towards 0. E.g. every value from -15 to 15 will be
+		// rounded towards 0 if divided by 16.
+
+		if fieldOffsetX < 0 {
+			fieldOffsetX -= pizzaFieldWidth - 1
+		}
+		if fieldOffsetY < 0 {
+			fieldOffsetY -= pizzaFieldHeight - 1
+		}
+
+		fieldOffsetX, fieldOffsetY = fieldOffsetX/pizzaFieldWidth, fieldOffsetY/pizzaFieldHeight
 
 		withinPizzaBounds := fieldOffsetX >= 0 && fieldOffsetX < d.pizza.Width() && fieldOffsetY >= 0 && fieldOffsetY < d.pizza.Height()
 		if withinPizzaBounds && !d.pizza.grid[fieldOffsetX][fieldOffsetY].invalid {
