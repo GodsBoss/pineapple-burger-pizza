@@ -226,7 +226,7 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			spriteMap.CreateSprite(
 				key,
 				canvas2drendering.SpriteAttributes{},
-				280*scale,
+				300*scale,
 				(10+18*y)*scale,
 				scale,
 				0,
