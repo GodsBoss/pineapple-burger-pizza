@@ -45,13 +45,13 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 
 		if event.Key == "r" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
-			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, clockwise)
+			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, counterClockwise)
 			calculateIngredientTargetFields(d)
 		}
 
 		if event.Key == "R" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientClockwise) % 4
-			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, counterClockwise)
+			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, clockwise)
 			calculateIngredientTargetFields(d)
 		}
 
@@ -288,12 +288,12 @@ func rotateFields(fields []vector2d.Vector[int], rotate func(int, int) (int, int
 
 // clockwise rotates x and y clockwise.
 func clockwise(x int, y int) (int, int) {
-	return y, -x
+	return -y, x
 }
 
 // counterClockwise rotates x and y counter-clockwise.
 func counterClockwise(x int, y int) (int, int) {
-	return -y, x
+	return y, -x
 }
 
 type draggedIngredient struct {
