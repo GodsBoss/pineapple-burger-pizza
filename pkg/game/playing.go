@@ -34,11 +34,13 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 		if event.Key == "r" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields)
+			calculateIngredientTargetFields(d)
 		}
 
 		if event.Key == "R" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(rotateFields(rotateFields(d.draggedIngredient.fields))) // Dirty hack! Use counter-clockwise rotation instead.
+			calculateIngredientTargetFields(d)
 		}
 
 		return game.SameState()
@@ -77,23 +79,27 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 			d.draggedIngredient.x = event.X
 			d.draggedIngredient.y = event.Y
 
-			for col := range d.pizza.grid {
-				for row := range d.pizza.grid[col] {
-					d.pizza.grid[col][row].draggedIngredientTarget = false
-				}
-			}
-
-			for _, field := range d.draggedIngredient.fields {
-				fieldOffsetX := (field.X()*pizzaFieldWidth + event.X - 160 + d.pizza.Width()*pizzaFieldWidth/2 - d.draggedIngredient.Width()/2 + pizzaFieldWidth/2) / pizzaFieldWidth
-				fieldOffsetY := (field.Y()*pizzaFieldHeight + event.Y - 100 + d.pizza.Height()*pizzaFieldHeight/2 - d.draggedIngredient.Height()/2 + pizzaFieldHeight/2) / pizzaFieldHeight
-
-				if fieldOffsetX >= 0 && fieldOffsetX < d.pizza.Width() && fieldOffsetY >= 0 && fieldOffsetY < d.pizza.Height() {
-					d.pizza.grid[fieldOffsetX][fieldOffsetY].draggedIngredientTarget = true
-				}
-			}
+			calculateIngredientTargetFields(d)
 		}
 
 		return game.SameState()
+	}
+}
+
+func calculateIngredientTargetFields(d *data) {
+	for col := range d.pizza.grid {
+		for row := range d.pizza.grid[col] {
+			d.pizza.grid[col][row].draggedIngredientTarget = false
+		}
+	}
+
+	for _, field := range d.draggedIngredient.fields {
+		fieldOffsetX := (field.X()*pizzaFieldWidth + d.draggedIngredient.x - 160 + d.pizza.Width()*pizzaFieldWidth/2 - d.draggedIngredient.Width()/2 + pizzaFieldWidth/2) / pizzaFieldWidth
+		fieldOffsetY := (field.Y()*pizzaFieldHeight + d.draggedIngredient.y - 100 + d.pizza.Height()*pizzaFieldHeight/2 - d.draggedIngredient.Height()/2 + pizzaFieldHeight/2) / pizzaFieldHeight
+
+		if fieldOffsetX >= 0 && fieldOffsetX < d.pizza.Width() && fieldOffsetY >= 0 && fieldOffsetY < d.pizza.Height() {
+			d.pizza.grid[fieldOffsetX][fieldOffsetY].draggedIngredientTarget = true
+		}
 	}
 }
 
