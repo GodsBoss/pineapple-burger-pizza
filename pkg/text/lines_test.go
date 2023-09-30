@@ -64,6 +64,18 @@ func TestLines(t *testing.T) {
 				"xx   yy",
 			},
 		},
+		"newlines": {
+			maxLineWidth: 10,
+			content:      "First.\nSecond.\nThis is a long third line.\nFour.",
+			expectedLines: []string{
+				"First.",
+				"Second.",
+				"This is a",
+				"long third",
+				"line.",
+				"Four.",
+			},
+		},
 	}
 
 	for name := range testcases {
