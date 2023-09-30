@@ -114,7 +114,40 @@ func (o order) applyTo(d *data) {
 }
 
 var possibleOrders = orders{
-	"1": {
+	"3_1": {
+		pizzaDiameter: 3,
+		likes: map[flavor]int{
+			flavorSweet: 1,
+			flavorFish:  2,
+		},
+		dislikes: map[flavor]struct{}{
+			flavorCalamari: struct{}{},
+		},
+		ingredients: map[ingredientType]int{
+			ingredientAnanas:      1,
+			ingredientAnchovi:     2,
+			ingredientRubberBoots: 1,
+		},
+		fixedForgiveness:  0,
+		randomForgiveness: 0,
+	},
+	"4_1": {
+		pizzaDiameter: 4,
+		likes: map[flavor]int{
+			flavorCalamari: 4,
+			flavorSalty:    2,
+		},
+		dislikes: map[flavor]struct{}{
+			flavorSweet: struct{}{},
+		},
+		ingredients: map[ingredientType]int{
+			ingredientAnchovi:     2,
+			ingredientRubberBoots: 4,
+		},
+		fixedForgiveness:  0,
+		randomForgiveness: 0,
+	},
+	"5_1": {
 		pizzaDiameter: 5,
 		likes: map[flavor]int{
 			flavorCalamari: 2,
