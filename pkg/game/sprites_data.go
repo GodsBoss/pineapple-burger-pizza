@@ -118,4 +118,28 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  40,
 		Height: 32,
 	},
+	"flavor_sweet": {
+		X:      416,
+		Y:      0,
+		Width:  16,
+		Height: 16,
+	},
+	"flavor_calamari": {
+		X:      432,
+		Y:      0,
+		Width:  16,
+		Height: 16,
+	},
+	"flavor_salty": {
+		X:      448,
+		Y:      0,
+		Width:  16,
+		Height: 16,
+	},
+	"flavor_fish": {
+		X:      464,
+		Y:      0,
+		Width:  16,
+		Height: 16,
+	},
 }
