@@ -128,7 +128,7 @@ var possibleOrders = orders{
 			ingredientAnchovi:     1,
 			ingredientRubberBoots: 2,
 		},
-		fixedForgiveness:  3,
-		randomForgiveness: 3,
+		fixedForgiveness:  2,
+		randomForgiveness: 1,
 	},
 }
