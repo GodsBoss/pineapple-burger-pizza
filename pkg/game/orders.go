@@ -137,7 +137,7 @@ var possibleOrders = orders{
 	"4_1": {
 		pizzaDiameter: 4,
 		likes: map[flavor]int{
-			flavorCalamari: 4,
+			flavorCalamari: 2,
 			flavorSalty:    2,
 		},
 		dislikes: map[flavor]struct{}{
