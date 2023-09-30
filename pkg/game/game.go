@@ -33,7 +33,9 @@ func New(img *dom.Image) *Game {
 		SetKeyboardHandler(createReceiveKeyEventPlaying()).
 		SetMouseHandler(createReceiveMouseEventPlaying())
 
-	gameOver.SetInitHandler(initGameOver)
+	gameOver.
+		SetInitHandler(initGameOver).
+		SetKeyboardHandler(createReceiveKeyEventGameOver(title.ID()))
 
 	instance, _ := tmpl.NewInstance()
 
