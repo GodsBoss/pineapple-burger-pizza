@@ -197,11 +197,13 @@ func createPizza(diameter int) *pizza {
 
 	max := diameter - 1
 
-	// Disable corner fields.
-	grid[0][0].invalid = true
-	grid[max][0].invalid = true
-	grid[0][max].invalid = true
-	grid[max][max].invalid = true
+	// Disable corner fields only if diameter > 3.
+	if diameter > 3 {
+		grid[0][0].invalid = true
+		grid[max][0].invalid = true
+		grid[0][max].invalid = true
+		grid[max][max].invalid = true
+	}
 
 	return &pizza{
 		grid:    grid,
