@@ -39,6 +39,7 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) {
 			for i, ingredient := range d.waitingIngredients {
 				if ingredient.inside(event.X, event.Y) {
+
 					if d.draggedIngredient == nil && ingredient.amount > 0 {
 						d.draggedIngredient = &draggedIngredient{
 							typ:         ingredient.typ,
@@ -47,6 +48,13 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 							y:           event.Y,
 						}
 						d.waitingIngredients[i].amount--
+						return game.SameState()
+					}
+
+					if d.draggedIngredient != nil && ingredient.typ == d.draggedIngredient.typ {
+						d.waitingIngredients[i].amount++
+						d.draggedIngredient = nil
+						return game.SameState()
 					}
 				}
 			}
