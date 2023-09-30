@@ -50,6 +50,14 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.NextState {
 	return func(d *data, event mouse.Event) game.NextState {
 		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) {
+			if d.draggedIngredient != nil && d.draggedIngredient.isValidPlacement() {
+				for _, field := range d.draggedIngredient.validFields {
+					d.pizza.grid[field.X()][field.Y()].occupied = true
+				}
+				d.draggedIngredient = nil
+				return game.SameState()
+			}
+
 			for i, ingredient := range d.waitingIngredients {
 				if ingredient.inside(event.X, event.Y) {
 
@@ -282,6 +290,10 @@ func (ingr draggedIngredient) Height() int {
 		}
 	}
 	return (maxY + 1) * pizzaFieldHeight
+}
+
+func (ingr draggedIngredient) isValidPlacement() bool {
+	return len(ingr.fields) == len(ingr.validFields) && len(ingr.invalidFields) == 0
 }
 
 // ingredientOrientation determines whether an ingredient is up, down, etc.
