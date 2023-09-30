@@ -8,8 +8,24 @@ import (
 
 func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, spriteKeys) {
 	spriteMap := canvas2drendering.NewSpriteMap(sourceImage)
-	spr := spriteKeys{}
-	return spriteMap, spr
+	keys := spriteKeys{}
+	addSprite := createAddSprite(spriteMap)
+
+	keys.backgroundTitle = addSprite("background_title")
+	keys.backgroundPlaying = addSprite("background_playing")
+	keys.backgroundGameOver = addSprite("background_game_over")
+
+	return spriteMap, keys
+}
+
+func createAddSprite(spriteMap canvas2drendering.SpriteMap) func(key string) canvas2drendering.SpriteKey {
+	return func(key string) canvas2drendering.SpriteKey {
+		return spriteMap.AddSpriteSpecification(
+			map[canvas2drendering.SpriteAttributes]canvas2drendering.SpriteData{
+				canvas2drendering.SpriteAttributes{}: spritesData[key],
+			},
+		)
+	}
 }
 
 // spriteKeys holds the sprite keys generated when adding sprite specs to the spriteKeys factory.

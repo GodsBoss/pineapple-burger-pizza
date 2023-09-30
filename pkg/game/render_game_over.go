@@ -6,5 +6,15 @@ import (
 )
 
 func renderGameOver(spriteMap canvas2drendering.SpriteMap, keys spriteKeys) stateRendererFunc {
-	return func(output *dom.Context2D, d *data, scale int) {}
+	return func(output *dom.Context2D, d *data, scale int) {
+		s := spriteMap.CreateSprite(
+			keys.backgroundGameOver,
+			canvas2drendering.SpriteAttributes{},
+			0,
+			0,
+			scale,
+			0,
+		)
+		s.Render(output)
+	}
 }
