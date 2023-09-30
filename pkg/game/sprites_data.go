@@ -23,15 +23,15 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Height: 200,
 	},
 	"pizza_grid_overlay_free": {
-		X:      48,
-		Y:      0,
-		Width:  16,
+		X:      0,
+		Y:      16,
+		Width:  20,
 		Height: 16,
 	},
 	"pizza_grid_overlay_occupied": {
-		X:      32,
+		X:      0,
 		Y:      0,
-		Width:  16,
+		Width:  20,
 		Height: 16,
 	},
 }
