@@ -14,39 +14,8 @@ func initPlaying(d *data) game.NextState {
 	d.state = playingState
 	d.score = 0
 	d.pizzaGridOverlayVisible = false
-	d.placedIngredients = make([]placedIngredient, 0)
-	d.pizza = createPizza(5)
-	d.waitingIngredients = []waitingIngredient{
-		{
-			typ:    ingredientAnchovi,
-			amount: 5,
-			x:      20,
-			y:      160,
-		},
-		{
-			typ:    ingredientAnanas,
-			amount: 2,
-			x:      200,
-			y:      130,
-		},
-		{
-			typ:    ingredientRubberBoots,
-			amount: 3,
-			x:      80,
-			y:      160,
-		},
-	}
-
-	d.customer = &customer{
-		likes: map[flavor]int{
-			flavorCalamari: 2,
-		},
-		dislikes: map[flavor]struct{}{
-			flavorSweet: struct{}{},
-		},
-	}
-
 	d.reputation = 10
+	getNewOrder(d)
 
 	return game.SameState()
 }
@@ -144,6 +113,12 @@ func createReceiveTickEventPlaying(gameOverState game.StateID) func(d *data, eve
 		}
 		return game.SameState()
 	}
+}
+
+func getNewOrder(d *data) {
+	d.placedIngredients = make([]placedIngredient, 0)
+	d.draggedIngredient = nil
+	possibleOrders.randomOrder(d)
 }
 
 func calculateIngredientTargetFields(d *data) {
