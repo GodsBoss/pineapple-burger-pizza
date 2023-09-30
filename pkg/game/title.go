@@ -1,6 +1,9 @@
 package game
 
-import "github.com/GodsBoss/gggg/v2/pkg/game"
+import (
+	"github.com/GodsBoss/gggg/v2/pkg/event/keyboard"
+	"github.com/GodsBoss/gggg/v2/pkg/game"
+)
 
 const titleState = "title"
 
@@ -8,4 +11,14 @@ func initTitle(d *data) game.NextState {
 	d.state = titleState
 
 	return game.SameState()
+}
+
+func createReceiveTitle(playingState game.StateID) func(d *data, ev keyboard.Event) game.NextState {
+	return func(d *data, ev keyboard.Event) game.NextState {
+		if ev.Key == "p" {
+			return game.SwitchState(playingState)
+		}
+
+		return game.SameState()
+	}
 }

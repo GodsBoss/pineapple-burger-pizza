@@ -24,7 +24,9 @@ func New(img *dom.Image) *Game {
 
 	// Configure states.
 
-	title.SetInitHandler(initTitle)
+	title.
+		SetInitHandler(initTitle).
+		SetKeyboardHandler(createReceiveTitle(playing.ID()))
 
 	playing.SetInitHandler(initPlaying)
 
