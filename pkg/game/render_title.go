@@ -5,6 +5,6 @@ import (
 	"github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
 )
 
-func renderTitle(spriteMap canvas2drendering.SpriteMap) stateRendererFunc {
+func renderTitle(spriteMap canvas2drendering.SpriteMap, keys spriteKeys) stateRendererFunc {
 	return func(output *dom.Context2D, d *data, scale int) {}
 }

@@ -15,7 +15,7 @@ func New(img *dom.Image) *Game {
 		},
 	}
 
-	spriteMap, _ := createSpriteMap(img)
+	spriteMap, keys := createSpriteMap(img)
 
 	// Define states.
 	title := tmpl.AddState()
@@ -37,9 +37,9 @@ func New(img *dom.Image) *Game {
 	}
 
 	r.
-		AddStateRenderer(titleState, stateRendererFunc(renderTitle(spriteMap))).
-		AddStateRenderer(playingState, stateRendererFunc(renderPlaying(spriteMap))).
-		AddStateRenderer(gameOverState, stateRendererFunc(renderGameOver(spriteMap)))
+		AddStateRenderer(titleState, stateRendererFunc(renderTitle(spriteMap, keys))).
+		AddStateRenderer(playingState, stateRendererFunc(renderPlaying(spriteMap, keys))).
+		AddStateRenderer(gameOverState, stateRendererFunc(renderGameOver(spriteMap, keys)))
 
 	return &Game{
 		data:     instance,
