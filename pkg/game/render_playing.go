@@ -24,6 +24,17 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		centerOffsetX := (160 - w*pizzaFieldWidth/2) * scale
 		centerOffsetY := (100 - h*pizzaFieldHeight/2) * scale
 
+		if pizzaKey, ok := keys.pizzas[d.pizza.Width()]; ok {
+			spriteMap.CreateSprite(
+				pizzaKey,
+				canvas2drendering.SpriteAttributes{},
+				centerOffsetX,
+				centerOffsetY,
+				scale,
+				0,
+			).Render(output)
+		}
+
 		for x := 0; x < w; x++ {
 			for y := 0; y < h; y++ {
 				if d.pizza.grid[x][y].invalid {

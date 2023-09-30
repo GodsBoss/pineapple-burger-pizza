@@ -166,4 +166,22 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  16,
 		Height: 16,
 	},
+	"pizza_3": {
+		X:      0,
+		Y:      112,
+		Width:  60,
+		Height: 48,
+	},
+	"pizza_4": {
+		X:      60,
+		Y:      112,
+		Width:  80,
+		Height: 64,
+	},
+	"pizza_5": {
+		X:      140,
+		Y:      112,
+		Width:  100,
+		Height: 80,
+	},
 }

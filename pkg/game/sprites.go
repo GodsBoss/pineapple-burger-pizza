@@ -13,6 +13,7 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	keys := spriteKeys{
 		ingredients: make(map[ingredientType][4]r.SpriteKey),
 		flavors:     make(map[flavor]r.SpriteKey),
+		pizzas:      make(map[int]r.SpriteKey),
 	}
 
 	addSprite := createAddSprite(spriteMap)
@@ -54,6 +55,10 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 
 	for _, fl := range flavors {
 		keys.flavors[fl] = addSprite("flavor_" + string(fl))
+	}
+
+	for p := 3; p <= 5; p++ {
+		keys.pizzas[p] = addSprite("pizza_" + strconv.Itoa(p))
 	}
 
 	return spriteMap, keys
@@ -105,4 +110,5 @@ type spriteKeys struct {
 
 	ingredients map[ingredientType][4]r.SpriteKey
 	flavors     map[flavor]r.SpriteKey
+	pizzas      map[int]r.SpriteKey
 }
