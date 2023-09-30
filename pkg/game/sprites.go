@@ -6,9 +6,9 @@ import (
 	r "github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
 )
 
-func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, *sprites) {
+func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprites) {
 	spriteMap := canvas2drendering.NewSpriteMap(sourceImage)
-	spr := &sprites{}
+	spr := sprites{}
 	return spriteMap, spr
 }
 
