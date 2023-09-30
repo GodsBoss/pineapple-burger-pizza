@@ -16,4 +16,7 @@ type data struct {
 
 	// draggedIngredient is the ingredient currently dragged by the player.
 	draggedIngredient *draggedIngredient
+
+	// customer is the customer waiting for the pizza.
+	customer *customer
 }

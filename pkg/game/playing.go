@@ -34,6 +34,15 @@ func initPlaying(d *data) game.NextState {
 		},
 	}
 
+	d.customer = &customer{
+		likes: map[flavor]int{
+			flavorCalamari: 2,
+		},
+		dislikes: map[flavor]struct{}{
+			flavorSweet: struct{}{},
+		},
+	}
+
 	return game.SameState()
 }
 
@@ -381,4 +390,26 @@ var ingredientFlavors = map[ingredientType]map[flavor]int{
 	ingredientRubberBoots: {
 		flavorCalamari: 1,
 	},
+}
+
+type customer struct {
+	likes    map[flavor]int
+	dislikes map[flavor]struct{}
+}
+
+// ratePizza lets the customer rate a pizza. The best possible rating is 0. Usually, ratings are negative.
+func (c customer) ratePizza(p pizza) int {
+	rating := 0
+
+	for fl, l := range c.likes {
+		if p.flavors[fl] < l {
+			rating -= l - p.flavors[fl]
+		}
+	}
+
+	for fl, _ := range c.dislikes {
+		rating -= p.flavors[fl]
+	}
+
+	return rating
 }
