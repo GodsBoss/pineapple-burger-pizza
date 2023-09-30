@@ -116,11 +116,13 @@ func calculateIngredientTargetFields(d *data) {
 		withinPizzaBounds := fieldOffsetX >= 0 && fieldOffsetX < d.pizza.Width() && fieldOffsetY >= 0 && fieldOffsetY < d.pizza.Height()
 		if withinPizzaBounds && !d.pizza.grid[fieldOffsetX][fieldOffsetY].invalid {
 			atLeastOneFieldInPizzaBounds = true
+			if d.pizza.grid[fieldOffsetX][fieldOffsetY].occupied {
+				d.draggedIngredient.invalidFields = append(d.draggedIngredient.invalidFields, vector2d.Cartesian[int](fieldOffsetX, fieldOffsetY))
+			}
 			d.pizza.grid[fieldOffsetX][fieldOffsetY].draggedIngredientTarget = true
 		} else {
 			d.draggedIngredient.invalidFields = append(d.draggedIngredient.invalidFields, vector2d.Cartesian[int](fieldOffsetX, fieldOffsetY))
 		}
-
 	}
 
 	if !atLeastOneFieldInPizzaBounds {
