@@ -118,6 +118,18 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  40,
 		Height: 32,
 	},
+	"customer_like": {
+		X:      400,
+		Y:      0,
+		Width:  16,
+		Height: 16,
+	},
+	"customer_dislike": {
+		X:      400,
+		Y:      16,
+		Width:  16,
+		Height: 16,
+	},
 	"flavor_sweet": {
 		X:      416,
 		Y:      0,

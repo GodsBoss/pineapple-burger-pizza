@@ -27,6 +27,9 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	keys.ingredientGridOverlayFree = addSprite("ingredient_grid_overlay_free")
 	keys.ingredientGridOverlayOccupied = addSprite("ingredient_grid_overlay_occupied")
 
+	keys.customerLike = addSprite("customer_like")
+	keys.customerDislike = addSprite("customer_dislike")
+
 	addIngredientSprites := createAddIngredientSprites(spriteMap)
 
 	ingredientKeys := []ingredientType{
@@ -90,6 +93,9 @@ type spriteKeys struct {
 
 	ingredientGridOverlayFree     r.SpriteKey
 	ingredientGridOverlayOccupied r.SpriteKey
+
+	customerLike    r.SpriteKey
+	customerDislike r.SpriteKey
 
 	ingredients map[ingredientType][4]r.SpriteKey
 	flavors     map[flavor]r.SpriteKey
