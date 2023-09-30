@@ -50,22 +50,11 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 
 		// Render laying ingredients
 		for _, ingredient := range d.waitingIngredients {
-			var amountOffsetX int
-			var amountOffsetY int
-
 			key := keys.ingredients[ingredient.typ][0]
+			size := ingredientSizes[ingredient.typ]
 
-			switch ingredient.typ {
-			case ingredientAnchovi:
-				amountOffsetX = 20
-				amountOffsetY = 20
-			case ingredientAnanas:
-				amountOffsetX = 20
-				amountOffsetY = 30
-			case ingredientRubberBoots:
-				amountOffsetX = 20
-				amountOffsetY = 25
-			}
+			amountOffsetX := size.Width/2 - 5
+			amountOffsetY := size.Height
 
 			// Skip unknown ingredient types.
 			if key == nil {
