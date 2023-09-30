@@ -16,10 +16,11 @@ func (os orders) randomOrder(d *data) {
 }
 
 var ingredientPositions = []vector2d.Vector[int]{
-	vector2d.Cartesian[int](20, 160),
-	vector2d.Cartesian[int](200, 130),
-	vector2d.Cartesian[int](80, 160),
-	vector2d.Cartesian[int](140, 140),
+	vector2d.Cartesian[int](45, 170),
+	vector2d.Cartesian[int](100, 180),
+	vector2d.Cartesian[int](160, 185),
+	vector2d.Cartesian[int](220, 180),
+	vector2d.Cartesian[int](275, 170),
 }
 
 type order struct {
@@ -104,8 +105,8 @@ func (o order) applyTo(d *data) {
 			waitingIngredient{
 				typ:    typ,
 				amount: amount,
-				x:      positions[positionIndex].X(),
-				y:      positions[positionIndex].Y(),
+				x:      positions[positionIndex].X() - ingredientSizes[typ].Width/2,
+				y:      positions[positionIndex].Y() - ingredientSizes[typ].Height,
 			},
 		)
 		positionIndex++
