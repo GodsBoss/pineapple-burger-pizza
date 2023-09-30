@@ -181,6 +181,28 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			).Render(output)
 		}
 
+		// Render pizza flavors.
+		pos = 0
+		for _, fl := range flavorList {
+			if amount, ok := d.pizza.flavors[fl]; ok {
+				spriteMap.CreateSprite(
+					keys.flavors[fl],
+					canvas2drendering.SpriteAttributes{},
+					(160+w*pizzaFieldWidth/2)*scale,
+					(100-h*pizzaFieldHeight/2+pos*18)*scale,
+					scale,
+					0,
+				).Render(output)
+				tm.Create(
+					(180+w*pizzaFieldWidth/2)*scale,
+					(105-h*pizzaFieldHeight/2+pos*18)*scale,
+					scale,
+					[]string{"*" + strconv.Itoa(amount)},
+				).Render(output)
+				pos++
+			}
+		}
+
 		// Render reputation
 		for y := 0; y < 10; y++ {
 			key := keys.reputationOK
