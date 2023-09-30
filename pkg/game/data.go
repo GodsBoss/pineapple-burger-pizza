@@ -17,6 +17,9 @@ type data struct {
 	// draggedIngredient is the ingredient currently dragged by the player.
 	draggedIngredient *draggedIngredient
 
+	// placedIngredients are the ingredients already placed on the pizza.
+	placedIngredients []placedIngredient
+
 	// customer is the customer waiting for the pizza.
 	customer *customer
 

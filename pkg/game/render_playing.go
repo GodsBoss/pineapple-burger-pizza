@@ -35,6 +35,20 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			).Render(output)
 		}
 
+		for _, placed := range d.placedIngredients {
+			offsetX := -ingredientSizes[placed.typ].Width / 2
+			offsetY := -ingredientSizes[placed.typ].Height / 2
+
+			spriteMap.CreateSprite(
+				keys.ingredients[placed.typ][int(placed.orientation)],
+				canvas2drendering.SpriteAttributes{},
+				(placed.x+offsetX)*scale,
+				(placed.y+offsetY)*scale,
+				scale,
+				0,
+			).Render(output)
+		}
+
 		for x := 0; x < w; x++ {
 			for y := 0; y < h; y++ {
 				if d.pizza.grid[x][y].invalid {

@@ -14,6 +14,7 @@ func initPlaying(d *data) game.NextState {
 	d.state = playingState
 	d.score = 0
 	d.pizzaGridOverlayVisible = false
+	d.placedIngredients = make([]placedIngredient, 0)
 	d.pizza = createPizza(5)
 	d.waitingIngredients = []waitingIngredient{
 		{
@@ -87,6 +88,15 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 				for flavor, amount := range ingredientFlavors[d.draggedIngredient.typ] {
 					d.pizza.flavors[flavor] += amount
 				}
+				d.placedIngredients = append(
+					d.placedIngredients,
+					placedIngredient{
+						typ:         d.draggedIngredient.typ,
+						orientation: d.draggedIngredient.orientation,
+						x:           d.draggedIngredient.x,
+						y:           d.draggedIngredient.y,
+					},
+				)
 				d.draggedIngredient = nil
 				return game.SameState()
 			}
@@ -386,6 +396,13 @@ const (
 	ingredientClockwise        ingredientOrientation = 1
 	ingredientCounterClockwise ingredientOrientation = 3
 )
+
+type placedIngredient struct {
+	typ         ingredientType
+	orientation ingredientOrientation
+	x           int
+	y           int
+}
 
 type flavor string
 
