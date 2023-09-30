@@ -18,23 +18,38 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			0,
 		).Render(output)
 
-		// Render pizza grid
-		if d.pizzaGridOverlayVisible {
-			w := d.pizza.Width()
-			h := d.pizza.Height()
+		w := d.pizza.Width()
+		h := d.pizza.Height()
 
-			offsetX := (160 - w*pizzaFieldWidth/2) * scale
-			offsetY := (100 - h*pizzaFieldHeight/2) * scale
+		offsetX := (160 - w*pizzaFieldWidth/2) * scale
+		offsetY := (100 - h*pizzaFieldHeight/2) * scale
 
-			for x := 0; x < w; x++ {
-				for y := 0; y < h; y++ {
-					if d.pizza.grid[x][y].invalid {
-						continue
-					}
+		for x := 0; x < w; x++ {
+			for y := 0; y < h; y++ {
+				if d.pizza.grid[x][y].invalid {
+					continue
+				}
 
+				if d.pizzaGridOverlayVisible {
 					overlayKey := keys.pizzaGridOverlayFree
 					if d.pizza.grid[x][y].occupied {
 						overlayKey = keys.pizzaGridOverlayOccupied
+					}
+
+					spriteMap.CreateSprite(
+						overlayKey,
+						canvas2drendering.SpriteAttributes{},
+						offsetX+x*pizzaFieldWidth*scale,
+						offsetY+y*pizzaFieldHeight*scale,
+						scale,
+						0,
+					).Render(output)
+				}
+
+				if d.pizza.grid[x][y].draggedIngredientTarget {
+					overlayKey := keys.ingredientGridOverlayFree
+					if d.pizza.grid[x][y].occupied {
+						overlayKey = keys.ingredientGridOverlayOccupied
 					}
 
 					spriteMap.CreateSprite(

@@ -20,6 +20,9 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	keys.pizzaGridOverlayFree = addSprite("pizza_grid_overlay_free")
 	keys.pizzaGridOverlayOccupied = addSprite("pizza_grid_overlay_occupied")
 
+	keys.ingredientGridOverlayFree = addSprite("ingredient_grid_overlay_free")
+	keys.ingredientGridOverlayOccupied = addSprite("ingredient_grid_overlay_occupied")
+
 	addIngredientSprites := createAddIngredientSprites(spriteMap)
 
 	keys.ingredientAnchovi = addIngredientSprites("anchovy")
@@ -61,6 +64,9 @@ type spriteKeys struct {
 
 	pizzaGridOverlayFree     r.SpriteKey
 	pizzaGridOverlayOccupied r.SpriteKey
+
+	ingredientGridOverlayFree     r.SpriteKey
+	ingredientGridOverlayOccupied r.SpriteKey
 
 	ingredientAnchovi [4]r.SpriteKey
 }

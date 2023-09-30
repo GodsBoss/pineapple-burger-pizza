@@ -34,6 +34,18 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  20,
 		Height: 16,
 	},
+	"ingredient_grid_overlay_free": {
+		X:      0,
+		Y:      48,
+		Width:  20,
+		Height: 16,
+	},
+	"ingredient_grid_overlay_occupied": {
+		X:      0,
+		Y:      32,
+		Width:  20,
+		Height: 16,
+	},
 	"anchovy_0": {
 		X:      20,
 		Y:      0,
