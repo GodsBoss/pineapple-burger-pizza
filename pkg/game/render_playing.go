@@ -56,11 +56,6 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			amountOffsetX := size.Width/2 - 5
 			amountOffsetY := size.Height
 
-			// Skip unknown ingredient types.
-			if key == nil {
-				continue
-			}
-
 			spriteMap.CreateSprite(
 				key,
 				canvas2drendering.SpriteAttributes{},
