@@ -103,12 +103,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 
 		// Render dragged ingredient
 		if d.draggedIngredient != nil {
-			size := ingredientSizes[d.draggedIngredient.typ]
-			offsetX, offsetY := -size.Width/2, -size.Height/2
-
-			if d.draggedIngredient.orientation == ingredientLeft || d.draggedIngredient.orientation == ingredientRight {
-				offsetX, offsetY = offsetY, offsetX
-			}
+			offsetX := -d.draggedIngredient.Width() / 2
+			offsetY := -d.draggedIngredient.Height() / 2
 
 			spriteMap.CreateSprite(
 				keys.ingredientAnchovi[int(d.draggedIngredient.orientation)],
