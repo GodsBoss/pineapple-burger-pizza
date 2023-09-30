@@ -186,8 +186,8 @@ const (
 // ingredientSizes are the sizes for waiting ingredients.
 var ingredientSizes = map[ingredientType]size{
 	ingredientAnchovi: size{
-		Width:  40,
-		Height: 16,
+		Width:  pizzaFieldWidth * 2,
+		Height: pizzaFieldHeight,
 	},
 }
 
