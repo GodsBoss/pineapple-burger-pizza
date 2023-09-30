@@ -401,7 +401,10 @@ var ingredientFlavors = map[ingredientType]map[flavor]int{
 }
 
 type customer struct {
-	likes    map[flavor]int
+	// likes determines what the customer expects from their pizza. Every missing flavor lets the rating suffer.
+	likes map[flavor]int
+
+	// dislikes determines what the customer does not want in their pizza. If disliked flavors are added, the rating suffers.
 	dislikes map[flavor]struct{}
 }
 
