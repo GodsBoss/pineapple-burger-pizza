@@ -59,6 +59,10 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				key = keys.ingredientAnchovi[0]
 				amountOffsetX = 20
 				amountOffsetY = 20
+			case ingredientAnanas:
+				key = keys.ingredientAnanas[0]
+				amountOffsetX = 20
+				amountOffsetY = 30
 			}
 
 			// Skip unknown ingredient types.
@@ -90,8 +94,17 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			offsetX := -d.draggedIngredient.Width() / 2
 			offsetY := -d.draggedIngredient.Height() / 2
 
+			var key canvas2drendering.SpriteKey
+
+			switch d.draggedIngredient.typ {
+			case ingredientAnchovi:
+				key = keys.ingredientAnchovi[int(d.draggedIngredient.orientation)]
+			case ingredientAnanas:
+				key = keys.ingredientAnanas[int(d.draggedIngredient.orientation)]
+			}
+
 			spriteMap.CreateSprite(
-				keys.ingredientAnchovi[int(d.draggedIngredient.orientation)],
+				key,
 				canvas2drendering.SpriteAttributes{},
 				(d.draggedIngredient.x+offsetX)*scale,
 				(d.draggedIngredient.y+offsetY)*scale,

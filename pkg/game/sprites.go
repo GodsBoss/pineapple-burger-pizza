@@ -26,6 +26,7 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	addIngredientSprites := createAddIngredientSprites(spriteMap)
 
 	keys.ingredientAnchovi = addIngredientSprites("anchovy")
+	keys.ingredientAnanas = addIngredientSprites("ananas")
 
 	return spriteMap, keys
 }
@@ -69,4 +70,5 @@ type spriteKeys struct {
 	ingredientGridOverlayOccupied r.SpriteKey
 
 	ingredientAnchovi [4]r.SpriteKey
+	ingredientAnanas  [4]r.SpriteKey
 }

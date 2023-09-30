@@ -70,4 +70,28 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  20,
 		Height: 32,
 	},
+	"ananas_0": {
+		X:      20,
+		Y:      32,
+		Width:  60,
+		Height: 48,
+	},
+	"ananas_1": {
+		X:      80,
+		Y:      32,
+		Width:  60,
+		Height: 48,
+	},
+	"ananas_2": {
+		X:      140,
+		Y:      32,
+		Width:  60,
+		Height: 48,
+	},
+	"ananas_3": {
+		X:      200,
+		Y:      32,
+		Width:  60,
+		Height: 48,
+	},
 }

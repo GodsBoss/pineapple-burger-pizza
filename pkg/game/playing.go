@@ -20,6 +20,12 @@ func initPlaying(d *data) game.NextState {
 			x:      20,
 			y:      160,
 		},
+		{
+			typ:    ingredientAnanas,
+			amount: 2,
+			x:      200,
+			y:      160,
+		},
 	}
 
 	return game.SameState()
@@ -197,6 +203,7 @@ type ingredientType string
 
 const (
 	ingredientAnchovi ingredientType = "anchovy"
+	ingredientAnanas  ingredientType = "ananas"
 )
 
 // ingredientSizes are the sizes for waiting ingredients.
@@ -204,6 +211,10 @@ var ingredientSizes = map[ingredientType]size{
 	ingredientAnchovi: size{
 		Width:  pizzaFieldWidth * 2,
 		Height: pizzaFieldHeight,
+	},
+	ingredientAnanas: size{
+		Width:  pizzaFieldWidth * 3,
+		Height: pizzaFieldHeight * 3,
 	},
 }
 
@@ -214,6 +225,13 @@ var ingredientFields = map[ingredientType][]vector2d.Vector[int]{
 	ingredientAnchovi: []vector2d.Vector[int]{
 		vector2d.Cartesian[int](0, 0),
 		vector2d.Cartesian[int](1, 0),
+	},
+	ingredientAnanas: []vector2d.Vector[int]{
+		vector2d.Cartesian[int](0, 1),
+		vector2d.Cartesian[int](0, 2),
+		vector2d.Cartesian[int](1, 1),
+		vector2d.Cartesian[int](1, 2),
+		vector2d.Cartesian[int](2, 0),
 	},
 }
 
