@@ -11,6 +11,14 @@ func initPlaying(d *data) game.NextState {
 	d.state = playingState
 	d.pizzaGridOverlayVisible = false
 	d.pizza = createPizza(5)
+	d.waitingIngredients = []waitingIngredient{
+		{
+			typ:    ingredientAnchovi,
+			amount: 5,
+			x:      20,
+			y:      160,
+		},
+	}
 
 	return game.SameState()
 }
@@ -21,6 +29,12 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 			d.pizzaGridOverlayVisible = !d.pizzaGridOverlayVisible
 		}
 
+		return game.SameState()
+	}
+}
+
+func createReceiveMouseEventPlaying() func(d *data, event keyboard.Event) game.NextState {
+	return func(d *data, event keyboard.Event) game.NextState {
 		return game.SameState()
 	}
 }
@@ -66,3 +80,17 @@ type pizzaField struct {
 	// occupied marks whether part of an ingredient occupies this field.
 	occupied bool
 }
+
+// waitingIngredient is an ingredient waiting on the table.
+type waitingIngredient struct {
+	typ    ingredientType
+	amount int
+	x      int
+	y      int
+}
+
+type ingredientType string
+
+const (
+	ingredientAnchovi ingredientType = "anchovy"
+)

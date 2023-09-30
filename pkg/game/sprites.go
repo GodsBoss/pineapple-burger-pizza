@@ -1,6 +1,8 @@
 package game
 
 import (
+	"strconv"
+
 	"github.com/GodsBoss/gggg/v2/pkg/dom"
 	"github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
 	r "github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
@@ -18,6 +20,10 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	keys.pizzaGridOverlayFree = addSprite("pizza_grid_overlay_free")
 	keys.pizzaGridOverlayOccupied = addSprite("pizza_grid_overlay_occupied")
 
+	addIngredientSprites := createAddIngredientSprites(spriteMap)
+
+	keys.ingredientAnchovi = addIngredientSprites("anchovy")
+
 	return spriteMap, keys
 }
 
@@ -31,6 +37,22 @@ func createAddSprite(spriteMap canvas2drendering.SpriteMap) func(key string) can
 	}
 }
 
+func createAddIngredientSprites(spriteMap canvas2drendering.SpriteMap) func(key string) [4]canvas2drendering.SpriteKey {
+	return func(key string) [4]canvas2drendering.SpriteKey {
+		spriteKeys := [4]canvas2drendering.SpriteKey{}
+
+		for suffix := 0; suffix <= 3; suffix++ {
+			spriteKeys[suffix] = spriteMap.AddSpriteSpecification(
+				map[canvas2drendering.SpriteAttributes]canvas2drendering.SpriteData{
+					canvas2drendering.SpriteAttributes{}: spritesData[key+"_"+strconv.Itoa(suffix)],
+				},
+			)
+		}
+
+		return spriteKeys
+	}
+}
+
 // spriteKeys holds the sprite keys generated when adding sprite specs to the spriteKeys factory.
 type spriteKeys struct {
 	backgroundTitle    r.SpriteKey
@@ -39,4 +61,6 @@ type spriteKeys struct {
 
 	pizzaGridOverlayFree     r.SpriteKey
 	pizzaGridOverlayOccupied r.SpriteKey
+
+	ingredientAnchovi [4]r.SpriteKey
 }

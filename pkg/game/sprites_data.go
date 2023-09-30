@@ -34,4 +34,28 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  20,
 		Height: 16,
 	},
+	"anchovy_0": {
+		X:      20,
+		Y:      0,
+		Width:  40,
+		Height: 16,
+	},
+	"anchovy_1": {
+		X:      60,
+		Y:      0,
+		Width:  20,
+		Height: 32,
+	},
+	"anchovy_2": {
+		X:      20,
+		Y:      16,
+		Width:  40,
+		Height: 16,
+	},
+	"anchovy_3": {
+		X:      80,
+		Y:      0,
+		Width:  20,
+		Height: 32,
+	},
 }

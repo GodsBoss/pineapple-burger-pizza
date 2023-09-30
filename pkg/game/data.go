@@ -10,4 +10,7 @@ type data struct {
 
 	// pizzaGridOverlayVisible determines whether the pizza grid overlay is visible.
 	pizzaGridOverlayVisible bool
+
+	// waitingIngredients are the ingredients that the player can take.
+	waitingIngredients []waitingIngredient
 }
