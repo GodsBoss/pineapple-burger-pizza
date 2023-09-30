@@ -93,13 +93,26 @@ func calculateIngredientTargetFields(d *data) {
 		}
 	}
 
+	d.draggedIngredient.invalidFields = make([]vector2d.Vector[int], 0)
+
+	atLeastOneFieldInPizzaBounds := false
+
 	for _, field := range d.draggedIngredient.fields {
 		fieldOffsetX := (field.X()*pizzaFieldWidth + d.draggedIngredient.x - 160 + d.pizza.Width()*pizzaFieldWidth/2 - d.draggedIngredient.Width()/2 + pizzaFieldWidth/2) / pizzaFieldWidth
 		fieldOffsetY := (field.Y()*pizzaFieldHeight + d.draggedIngredient.y - 100 + d.pizza.Height()*pizzaFieldHeight/2 - d.draggedIngredient.Height()/2 + pizzaFieldHeight/2) / pizzaFieldHeight
 
-		if fieldOffsetX >= 0 && fieldOffsetX < d.pizza.Width() && fieldOffsetY >= 0 && fieldOffsetY < d.pizza.Height() {
+		withinPizzaBounds := fieldOffsetX >= 0 && fieldOffsetX < d.pizza.Width() && fieldOffsetY >= 0 && fieldOffsetY < d.pizza.Height()
+		if withinPizzaBounds && !d.pizza.grid[fieldOffsetX][fieldOffsetY].invalid {
+			atLeastOneFieldInPizzaBounds = true
 			d.pizza.grid[fieldOffsetX][fieldOffsetY].draggedIngredientTarget = true
+		} else {
+			d.draggedIngredient.invalidFields = append(d.draggedIngredient.invalidFields, vector2d.Cartesian[int](fieldOffsetX, fieldOffsetY))
 		}
+
+	}
+
+	if !atLeastOneFieldInPizzaBounds {
+		d.draggedIngredient.invalidFields = make([]vector2d.Vector[int], 0)
 	}
 }
 
@@ -224,11 +237,12 @@ func rotateFields(fields []vector2d.Vector[int]) []vector2d.Vector[int] {
 }
 
 type draggedIngredient struct {
-	typ         ingredientType
-	orientation ingredientOrientation
-	x           int
-	y           int
-	fields      []vector2d.Vector[int]
+	typ           ingredientType
+	orientation   ingredientOrientation
+	x             int
+	y             int
+	fields        []vector2d.Vector[int]
+	invalidFields []vector2d.Vector[int]
 }
 
 func (ingr draggedIngredient) Width() int {

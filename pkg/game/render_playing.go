@@ -21,8 +21,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		w := d.pizza.Width()
 		h := d.pizza.Height()
 
-		offsetX := (160 - w*pizzaFieldWidth/2) * scale
-		offsetY := (100 - h*pizzaFieldHeight/2) * scale
+		centerOffsetX := (160 - w*pizzaFieldWidth/2) * scale
+		centerOffsetY := (100 - h*pizzaFieldHeight/2) * scale
 
 		for x := 0; x < w; x++ {
 			for y := 0; y < h; y++ {
@@ -39,8 +39,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 					spriteMap.CreateSprite(
 						overlayKey,
 						canvas2drendering.SpriteAttributes{},
-						offsetX+x*pizzaFieldWidth*scale,
-						offsetY+y*pizzaFieldHeight*scale,
+						centerOffsetX+x*pizzaFieldWidth*scale,
+						centerOffsetY+y*pizzaFieldHeight*scale,
 						scale,
 						0,
 					).Render(output)
@@ -55,8 +55,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 					spriteMap.CreateSprite(
 						overlayKey,
 						canvas2drendering.SpriteAttributes{},
-						offsetX+x*pizzaFieldWidth*scale,
-						offsetY+y*pizzaFieldHeight*scale,
+						centerOffsetX+x*pizzaFieldWidth*scale,
+						centerOffsetY+y*pizzaFieldHeight*scale,
 						scale,
 						0,
 					).Render(output)
@@ -114,6 +114,17 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				scale,
 				0,
 			).Render(output)
+
+			for _, field := range d.draggedIngredient.invalidFields {
+				spriteMap.CreateSprite(
+					keys.ingredientGridOverlayOccupied,
+					canvas2drendering.SpriteAttributes{},
+					centerOffsetX+field.X()*pizzaFieldWidth*scale,
+					centerOffsetY+field.Y()*pizzaFieldHeight*scale,
+					scale,
+					0,
+				).Render(output)
+			}
 		}
 	}
 }
