@@ -19,4 +19,7 @@ type data struct {
 
 	// customer is the customer waiting for the pizza.
 	customer *customer
+
+	// reputation is your reputation as a pizza baker. If this reaches zero, the game is over.
+	reputation int
 }

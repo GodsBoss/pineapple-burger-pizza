@@ -1,10 +1,13 @@
 package game
 
 import (
+	"strconv"
+
 	"github.com/GodsBoss/gggg/v2/pkg/event/keyboard"
 	"github.com/GodsBoss/gggg/v2/pkg/event/mouse"
 	"github.com/GodsBoss/gggg/v2/pkg/game"
 	"github.com/GodsBoss/gggg/v2/pkg/vector/vector2d"
+	"github.com/GodsBoss/pineapple-burger-pizza/pkg/console"
 )
 
 const playingState = "playing"
@@ -43,6 +46,8 @@ func initPlaying(d *data) game.NextState {
 		},
 	}
 
+	d.reputation = 10
+
 	return game.SameState()
 }
 
@@ -62,6 +67,28 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, counterClockwise)
 			calculateIngredientTargetFields(d)
+		}
+
+		// Give pizza to customer.
+		if event.Key == "c" && keyboard.IsDownEvent(event) {
+			rating := d.customer.ratePizza(*d.pizza) + d.customer.forgiveness
+			if rating > 0 {
+				d.reputation++
+				if d.reputation > 10 {
+					d.reputation = 10
+				}
+			}
+			if rating < 0 { // Bad pizza.
+				d.reputation--
+			}
+			if rating < 5 { // Very bad pizza.
+				d.reputation--
+			}
+			if d.reputation < 0 {
+				d.reputation = 0
+			}
+
+			console.Global().LogMessage(strconv.Itoa(d.reputation))
 		}
 
 		return game.SameState()
@@ -406,6 +433,9 @@ type customer struct {
 
 	// dislikes determines what the customer does not want in their pizza. If disliked flavors are added, the rating suffers.
 	dislikes map[flavor]struct{}
+
+	// forgiveness is the customer's tolerance for bad pizza.
+	forgiveness int
 }
 
 // ratePizza lets the customer rate a pizza. The best possible rating is 0. Usually, ratings are negative.

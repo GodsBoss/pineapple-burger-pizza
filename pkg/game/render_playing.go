@@ -169,6 +169,22 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				0,
 			).Render(output)
 		}
+
+		// Render reputation
+		for y := 0; y < 10; y++ {
+			key := keys.reputationOK
+			if d.reputation <= y {
+				key = keys.reputationGone
+			}
+			spriteMap.CreateSprite(
+				key,
+				canvas2drendering.SpriteAttributes{},
+				280*scale,
+				(10+18*y)*scale,
+				scale,
+				0,
+			).Render(output)
+		}
 	}
 }
 
