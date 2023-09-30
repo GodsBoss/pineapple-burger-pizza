@@ -78,7 +78,7 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 			if rating < 0 { // Bad pizza.
 				d.reputation--
 			}
-			if rating < 5 { // Very bad pizza.
+			if rating < -5 { // Very bad pizza.
 				d.reputation--
 			}
 			if d.reputation < 0 {
