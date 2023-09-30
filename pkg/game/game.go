@@ -28,7 +28,9 @@ func New(img *dom.Image) *Game {
 		SetInitHandler(initTitle).
 		SetKeyboardHandler(createReceiveTitle(playing.ID()))
 
-	playing.SetInitHandler(initPlaying)
+	playing.
+		SetInitHandler(initPlaying).
+		SetKeyboardHandler(createReceiveKeyEventPlaying())
 
 	gameOver.SetInitHandler(initGameOver)
 

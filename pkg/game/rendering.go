@@ -26,6 +26,8 @@ func (r *renderer) SetOutput(ctx2d *dom.Context2D) {
 }
 
 func (r *renderer) Render(d *data) {
+	w, h := r.output.Size()
+	r.output.ClearRect(0, 0, w, h)
 	if sr, ok := r.stateRenderers[d.state]; ok {
 		sr.Render(r.output, d, r.scaler.Scale())
 	}
