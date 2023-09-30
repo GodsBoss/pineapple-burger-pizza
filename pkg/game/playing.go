@@ -30,6 +30,14 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 			d.pizzaGridOverlayVisible = !d.pizzaGridOverlayVisible
 		}
 
+		if event.Key == "r" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
+			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientClockwise) % 4
+		}
+
+		if event.Key == "R" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
+			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
+		}
+
 		return game.SameState()
 	}
 }
@@ -156,4 +164,9 @@ const (
 	ingredientRight ingredientOrientation = 1
 	ingredientDown  ingredientOrientation = 2
 	ingredientLeft  ingredientOrientation = 3
+)
+
+const (
+	ingredientClockwise        ingredientOrientation = 1
+	ingredientCounterClockwise ingredientOrientation = 3
 )

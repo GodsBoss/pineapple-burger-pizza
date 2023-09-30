@@ -91,6 +91,10 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			size := ingredientSizes[d.draggedIngredient.typ]
 			offsetX, offsetY := -size.Width/2, -size.Height/2
 
+			if d.draggedIngredient.orientation == ingredientLeft || d.draggedIngredient.orientation == ingredientRight {
+				offsetX, offsetY = offsetY, offsetX
+			}
+
 			spriteMap.CreateSprite(
 				keys.ingredientAnchovi[int(d.draggedIngredient.orientation)],
 				canvas2drendering.SpriteAttributes{},
