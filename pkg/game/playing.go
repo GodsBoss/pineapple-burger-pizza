@@ -2,6 +2,7 @@ package game
 
 import (
 	"github.com/GodsBoss/gggg/v2/pkg/event/keyboard"
+	"github.com/GodsBoss/gggg/v2/pkg/event/mouse"
 	"github.com/GodsBoss/gggg/v2/pkg/game"
 )
 
@@ -33,8 +34,29 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 	}
 }
 
-func createReceiveMouseEventPlaying() func(d *data, event keyboard.Event) game.NextState {
-	return func(d *data, event keyboard.Event) game.NextState {
+func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.NextState {
+	return func(d *data, event mouse.Event) game.NextState {
+		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) {
+			for i, ingredient := range d.waitingIngredients {
+				if ingredient.inside(event.X, event.Y) {
+					if d.draggedIngredient == nil && ingredient.amount > 0 {
+						d.draggedIngredient = &draggedIngredient{
+							typ:         ingredient.typ,
+							orientation: ingredientUp,
+							x:           event.X,
+							y:           event.Y,
+						}
+						d.waitingIngredients[i].amount--
+					}
+				}
+			}
+		}
+
+		if mouse.IsMoveEvent(event) && d.draggedIngredient != nil {
+			d.draggedIngredient.x = event.X
+			d.draggedIngredient.y = event.Y
+		}
+
 		return game.SameState()
 	}
 }
@@ -89,8 +111,41 @@ type waitingIngredient struct {
 	y      int
 }
 
+func (ingr waitingIngredient) inside(x int, y int) bool {
+	s, ok := ingredientSizes[ingr.typ]
+	if !ok {
+		return false
+	}
+	return x >= ingr.x && y >= ingr.y && x <= ingr.x+s.Width && y <= ingr.y+s.Height
+}
+
 type ingredientType string
 
 const (
 	ingredientAnchovi ingredientType = "anchovy"
+)
+
+// ingredientSizes are the sizes for waiting ingredients.
+var ingredientSizes = map[ingredientType]size{
+	ingredientAnchovi: size{
+		Width:  40,
+		Height: 16,
+	},
+}
+
+type draggedIngredient struct {
+	typ         ingredientType
+	orientation ingredientOrientation
+	x           int
+	y           int
+}
+
+// ingredientOrientation determines whether an ingredient is up, down, etc.
+type ingredientOrientation int
+
+const (
+	ingredientUp    ingredientOrientation = 0
+	ingredientRight ingredientOrientation = 1
+	ingredientDown  ingredientOrientation = 2
+	ingredientLeft  ingredientOrientation = 3
 )

@@ -13,4 +13,7 @@ type data struct {
 
 	// waitingIngredients are the ingredients that the player can take.
 	waitingIngredients []waitingIngredient
+
+	// draggedIngredient is the ingredient currently dragged by the player.
+	draggedIngredient *draggedIngredient
 }

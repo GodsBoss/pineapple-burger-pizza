@@ -85,6 +85,21 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				[]string{amountString},
 			).Render(output)
 		}
+
+		// Render dragged ingredient
+		if d.draggedIngredient != nil {
+			size := ingredientSizes[d.draggedIngredient.typ]
+			offsetX, offsetY := -size.Width/2, -size.Height/2
+
+			spriteMap.CreateSprite(
+				keys.ingredientAnchovi[int(d.draggedIngredient.orientation)],
+				canvas2drendering.SpriteAttributes{},
+				(d.draggedIngredient.x+offsetX)*scale,
+				(d.draggedIngredient.y+offsetY)*scale,
+				scale,
+				0,
+			).Render(output)
+		}
 	}
 }
 

@@ -30,7 +30,8 @@ func New(img *dom.Image) *Game {
 
 	playing.
 		SetInitHandler(initPlaying).
-		SetKeyboardHandler(createReceiveKeyEventPlaying())
+		SetKeyboardHandler(createReceiveKeyEventPlaying()).
+		SetMouseHandler(createReceiveMouseEventPlaying())
 
 	gameOver.SetInitHandler(initGameOver)
 
