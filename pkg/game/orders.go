@@ -9,10 +9,13 @@ import (
 type orders map[string]order
 
 func (os orders) randomOrder(d *data) {
-	for _, o := range os {
-		o.applyTo(d)
-		return
+	keys := make([]string, 0)
+
+	for key := range os {
+		keys = append(keys, key)
 	}
+
+	os[keys[rand.Intn(len(keys))]].applyTo(d)
 }
 
 var ingredientPositions = []vector2d.Vector[int]{
