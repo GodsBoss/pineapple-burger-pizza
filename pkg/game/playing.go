@@ -38,13 +38,13 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 		}
 
 		if event.Key == "r" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
-			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientClockwise) % 4
+			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, clockwise)
 			calculateIngredientTargetFields(d)
 		}
 
 		if event.Key == "R" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
-			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
+			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, counterClockwise)
 			calculateIngredientTargetFields(d)
 		}
