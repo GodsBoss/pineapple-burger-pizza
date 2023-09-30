@@ -63,6 +63,10 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				key = keys.ingredientAnanas[0]
 				amountOffsetX = 20
 				amountOffsetY = 30
+			case ingredientRubberBoots:
+				key = keys.ingredientRubberBoots[0]
+				amountOffsetX = 20
+				amountOffsetY = 25
 			}
 
 			// Skip unknown ingredient types.
@@ -101,6 +105,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				key = keys.ingredientAnchovi[int(d.draggedIngredient.orientation)]
 			case ingredientAnanas:
 				key = keys.ingredientAnanas[int(d.draggedIngredient.orientation)]
+			case ingredientRubberBoots:
+				key = keys.ingredientRubberBoots[int(d.draggedIngredient.orientation)]
 			}
 
 			spriteMap.CreateSprite(

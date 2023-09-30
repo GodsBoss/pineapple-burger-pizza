@@ -94,4 +94,28 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  60,
 		Height: 48,
 	},
+	"rubber_boots_0": {
+		X:      0,
+		Y:      80,
+		Width:  40,
+		Height: 32,
+	},
+	"rubber_boots_1": {
+		X:      40,
+		Y:      80,
+		Width:  40,
+		Height: 32,
+	},
+	"rubber_boots_2": {
+		X:      80,
+		Y:      80,
+		Width:  40,
+		Height: 32,
+	},
+	"rubber_boots_3": {
+		X:      120,
+		Y:      80,
+		Width:  40,
+		Height: 32,
+	},
 }
