@@ -45,22 +45,6 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 						0,
 					).Render(output)
 				}
-
-				if d.pizza.grid[x][y].draggedIngredientTarget {
-					overlayKey := keys.ingredientGridOverlayFree
-					if d.pizza.grid[x][y].occupied {
-						overlayKey = keys.ingredientGridOverlayOccupied
-					}
-
-					spriteMap.CreateSprite(
-						overlayKey,
-						canvas2drendering.SpriteAttributes{},
-						centerOffsetX+x*pizzaFieldWidth*scale,
-						centerOffsetY+y*pizzaFieldHeight*scale,
-						scale,
-						0,
-					).Render(output)
-				}
 			}
 		}
 
@@ -114,6 +98,17 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				scale,
 				0,
 			).Render(output)
+
+			for _, field := range d.draggedIngredient.validFields {
+				spriteMap.CreateSprite(
+					keys.ingredientGridOverlayFree,
+					canvas2drendering.SpriteAttributes{},
+					centerOffsetX+field.X()*pizzaFieldWidth*scale,
+					centerOffsetY+field.Y()*pizzaFieldHeight*scale,
+					scale,
+					0,
+				).Render(output)
+			}
 
 			for _, field := range d.draggedIngredient.invalidFields {
 				spriteMap.CreateSprite(

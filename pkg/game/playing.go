@@ -93,6 +93,7 @@ func calculateIngredientTargetFields(d *data) {
 		}
 	}
 
+	d.draggedIngredient.validFields = make([]vector2d.Vector[int], 0)
 	d.draggedIngredient.invalidFields = make([]vector2d.Vector[int], 0)
 
 	atLeastOneFieldInPizzaBounds := false
@@ -118,6 +119,8 @@ func calculateIngredientTargetFields(d *data) {
 			atLeastOneFieldInPizzaBounds = true
 			if d.pizza.grid[fieldOffsetX][fieldOffsetY].occupied {
 				d.draggedIngredient.invalidFields = append(d.draggedIngredient.invalidFields, vector2d.Cartesian[int](fieldOffsetX, fieldOffsetY))
+			} else {
+				d.draggedIngredient.validFields = append(d.draggedIngredient.validFields, vector2d.Cartesian[int](fieldOffsetX, fieldOffsetY))
 			}
 			d.pizza.grid[fieldOffsetX][fieldOffsetY].draggedIngredientTarget = true
 		} else {
@@ -126,6 +129,7 @@ func calculateIngredientTargetFields(d *data) {
 	}
 
 	if !atLeastOneFieldInPizzaBounds {
+		d.draggedIngredient.validFields = make([]vector2d.Vector[int], 0)
 		d.draggedIngredient.invalidFields = make([]vector2d.Vector[int], 0)
 	}
 }
@@ -256,6 +260,7 @@ type draggedIngredient struct {
 	x             int
 	y             int
 	fields        []vector2d.Vector[int]
+	validFields   []vector2d.Vector[int]
 	invalidFields []vector2d.Vector[int]
 }
 
