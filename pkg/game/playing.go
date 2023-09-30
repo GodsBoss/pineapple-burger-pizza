@@ -214,20 +214,31 @@ const (
 )
 
 // ingredientSizes are the sizes for waiting ingredients.
-var ingredientSizes = map[ingredientType]size{
-	ingredientAnchovi: size{
-		Width:  pizzaFieldWidth * 2,
-		Height: pizzaFieldHeight,
-	},
-	ingredientAnanas: size{
-		Width:  pizzaFieldWidth * 3,
-		Height: pizzaFieldHeight * 3,
-	},
-	ingredientRubberBoots: size{
-		Width:  pizzaFieldWidth * 2,
-		Height: pizzaFieldHeight * 2,
-	},
-}
+var ingredientSizes = func(fieldsPerIngredientType map[ingredientType][]vector2d.Vector[int]) map[ingredientType]size {
+
+	sizes := make(map[ingredientType]size)
+
+	for key, fields := range fieldsPerIngredientType {
+		maxX, maxY := 0, 0
+
+		for _, field := range fields {
+			if x := field.X(); x > maxX {
+				maxX = x
+			}
+			if y := field.Y(); y > maxY {
+				maxY = y
+			}
+		}
+
+		sizes[key] = size{
+			Width:  (maxX + 1) * pizzaFieldWidth,
+			Height: (maxY + 1) * pizzaFieldHeight,
+		}
+	}
+
+	return sizes
+
+}(ingredientFields)
 
 // ingredientFields maps ingredient types to the fields it will occupy on a pizza.
 // This refers to the fields when in "up" orientation, so when ingredients are
