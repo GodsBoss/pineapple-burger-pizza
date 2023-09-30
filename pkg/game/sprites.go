@@ -6,14 +6,14 @@ import (
 	r "github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
 )
 
-func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprites) {
+func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, spriteKeys) {
 	spriteMap := canvas2drendering.NewSpriteMap(sourceImage)
-	spr := sprites{}
+	spr := spriteKeys{}
 	return spriteMap, spr
 }
 
-// sprites holds the sprite keys generated when adding sprite specs to the sprites factory.
-type sprites struct {
+// spriteKeys holds the sprite keys generated when adding sprite specs to the spriteKeys factory.
+type spriteKeys struct {
 	backgroundTitle    r.SpriteKey
 	backgroundPlaying  r.SpriteKey
 	backgroundGameOver r.SpriteKey
