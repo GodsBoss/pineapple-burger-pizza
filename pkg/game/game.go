@@ -38,9 +38,9 @@ func New(img *dom.Image) *Game {
 	}
 
 	r.
-		AddStateRenderer(titleState, stateRendererFunc(renderTitle)).
-		AddStateRenderer(playingState, stateRendererFunc(renderPlaying)).
-		AddStateRenderer(gameOverState, stateRendererFunc(renderGameOver))
+		AddStateRenderer(titleState, stateRendererFunc(renderTitle())).
+		AddStateRenderer(playingState, stateRendererFunc(renderPlaying())).
+		AddStateRenderer(gameOverState, stateRendererFunc(renderGameOver()))
 
 	return &Game{
 		data:     instance,
