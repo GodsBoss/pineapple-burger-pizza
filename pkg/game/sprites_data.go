@@ -184,4 +184,22 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  100,
 		Height: 80,
 	},
+	"customer_head_normal": {
+		X:      1520,
+		Y:      200,
+		Width:  40,
+		Height: 32,
+	},
+	"customer_head_angry": {
+		X:      1560,
+		Y:      200,
+		Width:  40,
+		Height: 32,
+	},
+	"customer_head_happy": {
+		X:      1520,
+		Y:      232,
+		Width:  40,
+		Height: 32,
+	},
 }

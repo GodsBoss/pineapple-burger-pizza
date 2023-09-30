@@ -34,6 +34,10 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	keys.reputationOK = addSprite("reputation_ok")
 	keys.reputationGone = addSprite("reputation_gone")
 
+	keys.customerHeadNormal = addSprite("customer_head_normal")
+	keys.customerHeadAngry = addSprite("customer_head_angry")
+	keys.customerHeadHappy = addSprite("customer_head_happy")
+
 	addIngredientSprites := createAddIngredientSprites(spriteMap)
 
 	ingredientKeys := []ingredientType{
@@ -107,6 +111,10 @@ type spriteKeys struct {
 
 	reputationOK   r.SpriteKey
 	reputationGone r.SpriteKey
+
+	customerHeadNormal r.SpriteKey
+	customerHeadAngry  r.SpriteKey
+	customerHeadHappy  r.SpriteKey
 
 	ingredients map[ingredientType][4]r.SpriteKey
 	flavors     map[flavor]r.SpriteKey
