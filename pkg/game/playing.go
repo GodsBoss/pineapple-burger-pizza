@@ -41,6 +41,7 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 		// Give pizza to customer.
 		if event.Key == "c" && keyboard.IsDownEvent(event) {
 			customerGetsPizza(d)
+			getNewOrder(d)
 		}
 
 		return game.SameState()
