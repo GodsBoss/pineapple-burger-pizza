@@ -17,6 +17,9 @@ func initGameOver(d *data) game.NextState {
 func createReceiveKeyEventGameOver(titleState game.StateID) func(d *data, event keyboard.Event) game.NextState {
 	return func(d *data, event keyboard.Event) game.NextState {
 		if event.Key == "t" || event.Key == "T" {
+			if d.score > d.highscore {
+				d.highscore = d.score
+			}
 			return game.SwitchState(titleState)
 		}
 		return game.SameState()

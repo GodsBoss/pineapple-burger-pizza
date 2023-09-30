@@ -22,4 +22,10 @@ type data struct {
 
 	// reputation is your reputation as a pizza baker. If this reaches zero, the game is over.
 	reputation int
+
+	// score is the score of this run.
+	score int
+
+	// highscore is the highest score achieved.
+	highscore int
 }

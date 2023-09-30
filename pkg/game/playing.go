@@ -12,6 +12,7 @@ const playingState = "playing"
 
 func initPlaying(d *data) game.NextState {
 	d.state = playingState
+	d.score = 0
 	d.pizzaGridOverlayVisible = false
 	d.pizza = createPizza(5)
 	d.waitingIngredients = []waitingIngredient{
