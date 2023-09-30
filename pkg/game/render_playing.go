@@ -111,6 +111,64 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				).Render(output)
 			}
 		}
+
+		// Render customer likes.
+		pos := 0
+		for _, fl := range flavorList {
+			if amount, ok := d.customer.likes[fl]; ok {
+				spriteMap.CreateSprite(
+					keys.flavors[fl],
+					canvas2drendering.SpriteAttributes{},
+					20*scale,
+					(20+pos*18)*scale,
+					scale,
+					0,
+				).Render(output)
+				tm.Create(
+					40*scale,
+					(25+pos*18)*scale,
+					scale,
+					[]string{"*" + strconv.Itoa(amount)},
+				).Render(output)
+				pos++
+			}
+		}
+		if len(d.customer.likes) > 0 {
+			spriteMap.CreateSprite(
+				keys.customerLike,
+				canvas2drendering.SpriteAttributes{},
+				20*scale,
+				2*scale,
+				scale,
+				0,
+			).Render(output)
+		}
+
+		// Render customer dislikes.
+		pos = 0
+		for _, fl := range flavorList {
+			if _, ok := d.customer.dislikes[fl]; ok {
+				spriteMap.CreateSprite(
+					keys.flavors[fl],
+					canvas2drendering.SpriteAttributes{},
+					(140+24*pos)*scale,
+					30*scale,
+					scale,
+					0,
+				).Render(output)
+				pos++
+			}
+		}
+		if len(d.customer.dislikes) > 0 {
+			spriteMap.CreateSprite(
+				keys.customerDislike,
+				canvas2drendering.SpriteAttributes{},
+				116*scale,
+				30*scale,
+				scale,
+				0,
+			).Render(output)
+		}
 	}
 }
 
