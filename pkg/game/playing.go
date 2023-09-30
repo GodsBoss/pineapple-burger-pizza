@@ -137,8 +137,11 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 	}
 }
 
-func createReceiveTickEventPlaying() func(d *data, event tick.Event) game.NextState {
+func createReceiveTickEventPlaying(gameOverState game.StateID) func(d *data, event tick.Event) game.NextState {
 	return func(d *data, event tick.Event) game.NextState {
+		if d.reputation <= 0 {
+			return game.SwitchState(gameOverState)
+		}
 		return game.SameState()
 	}
 }
