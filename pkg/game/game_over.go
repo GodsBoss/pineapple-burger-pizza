@@ -2,6 +2,7 @@ package game
 
 import (
 	"github.com/GodsBoss/gggg/v2/pkg/event/keyboard"
+	"github.com/GodsBoss/gggg/v2/pkg/event/tick"
 	"github.com/GodsBoss/gggg/v2/pkg/game"
 )
 
@@ -18,6 +19,12 @@ func createReceiveKeyEventGameOver(titleState game.StateID) func(d *data, event 
 		if event.Key == "t" || event.Key == "T" {
 			return game.SwitchState(titleState)
 		}
+		return game.SameState()
+	}
+}
+
+func createReceiveTickEventGameOver() func(d *data, event tick.Event) game.NextState {
+	return func(d *data, event tick.Event) game.NextState {
 		return game.SameState()
 	}
 }

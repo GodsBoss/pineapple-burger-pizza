@@ -3,6 +3,7 @@ package game
 import (
 	"github.com/GodsBoss/gggg/v2/pkg/event/keyboard"
 	"github.com/GodsBoss/gggg/v2/pkg/event/mouse"
+	"github.com/GodsBoss/gggg/v2/pkg/event/tick"
 	"github.com/GodsBoss/gggg/v2/pkg/game"
 	"github.com/GodsBoss/gggg/v2/pkg/vector/vector2d"
 )
@@ -121,6 +122,12 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 			calculateIngredientTargetFields(d)
 		}
 
+		return game.SameState()
+	}
+}
+
+func createReceiveTickEventPlaying() func(d *data, event tick.Event) game.NextState {
+	return func(d *data, event tick.Event) game.NextState {
 		return game.SameState()
 	}
 }

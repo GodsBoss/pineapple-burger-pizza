@@ -26,16 +26,19 @@ func New(img *dom.Image) *Game {
 
 	title.
 		SetInitHandler(initTitle).
-		SetKeyboardHandler(createReceiveTitle(playing.ID()))
+		SetKeyboardHandler(createReceiveTitle(playing.ID())).
+		SetTickHandler(createReceiveTickEventTitle())
 
 	playing.
 		SetInitHandler(initPlaying).
 		SetKeyboardHandler(createReceiveKeyEventPlaying()).
-		SetMouseHandler(createReceiveMouseEventPlaying())
+		SetMouseHandler(createReceiveMouseEventPlaying()).
+		SetTickHandler(createReceiveTickEventPlaying())
 
 	gameOver.
 		SetInitHandler(initGameOver).
-		SetKeyboardHandler(createReceiveKeyEventGameOver(title.ID()))
+		SetKeyboardHandler(createReceiveKeyEventGameOver(title.ID())).
+		SetTickHandler(createReceiveTickEventGameOver())
 
 	instance, _ := tmpl.NewInstance()
 
