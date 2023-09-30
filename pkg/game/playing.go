@@ -1,13 +1,10 @@
 package game
 
 import (
-	"strconv"
-
 	"github.com/GodsBoss/gggg/v2/pkg/event/keyboard"
 	"github.com/GodsBoss/gggg/v2/pkg/event/mouse"
 	"github.com/GodsBoss/gggg/v2/pkg/game"
 	"github.com/GodsBoss/gggg/v2/pkg/vector/vector2d"
-	"github.com/GodsBoss/pineapple-burger-pizza/pkg/console"
 )
 
 const playingState = "playing"
@@ -87,8 +84,6 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 			if d.reputation < 0 {
 				d.reputation = 0
 			}
-
-			console.Global().LogMessage(strconv.Itoa(d.reputation))
 		}
 
 		return game.SameState()
