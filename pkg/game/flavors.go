@@ -39,4 +39,7 @@ var ingredientFlavors = map[ingredientType]map[flavor]int{
 		flavorMeat:  1,
 		flavorSalty: 1,
 	},
+	ingredientTomatoSauce: {
+		flavorLiquid: 1,
+	},
 }

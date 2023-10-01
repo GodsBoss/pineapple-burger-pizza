@@ -166,6 +166,30 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  40,
 		Height: 48,
 	},
+	"tomato_sauce_0": {
+		X:      100,
+		Y:      0,
+		Width:  40,
+		Height: 32,
+	},
+	"tomato_sauce_1": {
+		X:      140,
+		Y:      0,
+		Width:  40,
+		Height: 32,
+	},
+	"tomato_sauce_2": {
+		X:      180,
+		Y:      0,
+		Width:  40,
+		Height: 32,
+	},
+	"tomato_sauce_3": {
+		X:      220,
+		Y:      0,
+		Width:  40,
+		Height: 32,
+	},
 	"customer_like": {
 		X:      400,
 		Y:      0,
