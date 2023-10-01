@@ -53,7 +53,9 @@ func customerGetsPizza(d *data) {
 	d.customer.activity = customerEating
 	d.customer.remainingActivityTime = 2000
 	d.customer.animation = animation.NewFrames(3, 300)
+}
 
+func customerExperiencesFlavors(d *data) {
 	rating := d.customer.ratePizza(*d.pizza) + d.customer.forgiveness
 	if rating > 0 {
 		d.reputation++

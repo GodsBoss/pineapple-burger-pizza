@@ -131,6 +131,10 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		if d.highscore > 0 {
 			tm.Create(188*scale, 10*scale, scale, []string{"hiscore: " + minifmt.FormatInt(d.highscore, 6, " ")}).Render(output)
 		}
+
+		if d.reputation <= 0 {
+			renderText(120, 20, []string{"You are a terrible baker!", "Press 'T' to return to title"})
+		}
 	}
 }
 

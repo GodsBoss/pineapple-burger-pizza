@@ -43,6 +43,14 @@ func createReceiveKeyEventPlaying(title game.StateID) func(d *data, event keyboa
 			return game.SwitchState(title)
 		}
 
+		if d.reputation <= 0 && (event.Key == "t" || event.Key == "T") {
+			if d.score > d.highscore {
+				d.highscore = d.score
+			}
+
+			return game.SwitchState(title)
+		}
+
 		// Give pizza to customer.
 		if event.Key == "c" && keyboard.IsDownEvent(event) && d.customer.isWaiting() {
 			customerGetsPizza(d)
@@ -54,7 +62,7 @@ func createReceiveKeyEventPlaying(title game.StateID) func(d *data, event keyboa
 
 func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.NextState {
 	return func(d *data, event mouse.Event) game.NextState {
-		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) && d.customer.isWaiting() {
+		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) && d.customer.isWaiting() && d.reputation > 0 {
 			if d.draggedIngredient != nil && d.draggedIngredient.isValidPlacement() {
 				placeIngredient(d)
 				return game.SameState()
@@ -86,12 +94,12 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 		}
 
 		if mouse.IsPrimaryButtonEvent(event) && mouse.IsUpEvent(event) {
-			if event.X > 10 && event.X < 100 && event.Y > 0 && event.Y < 50 && d.customer.isWaiting() {
+			if event.X > 10 && event.X < 100 && event.Y > 0 && event.Y < 50 && d.customer.isWaiting() && d.reputation > 0 {
 				customerGetsPizza(d)
 			}
 		}
 
-		if mouse.IsMoveEvent(event) && d.draggedIngredient != nil {
+		if mouse.IsMoveEvent(event) && d.draggedIngredient != nil && d.reputation > 0 {
 			d.draggedIngredient.x = event.X
 			d.draggedIngredient.y = event.Y
 
@@ -102,12 +110,8 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 	}
 }
 
-func createReceiveTickEventPlaying(gameOverState game.StateID) func(d *data, event tick.Event) game.NextState {
+func createReceiveTickEventPlaying() func(d *data, event tick.Event) game.NextState {
 	return func(d *data, event tick.Event) game.NextState {
-		if d.reputation <= 0 {
-			return game.SwitchState(gameOverState)
-		}
-
 		if d.customer.activity != customerWaiting {
 			d.customer.remainingActivityTime -= event.MsSinceLastTick
 		}
@@ -115,12 +119,17 @@ func createReceiveTickEventPlaying(gameOverState game.StateID) func(d *data, eve
 		if d.customer.activity == customerEating && d.customer.remainingActivityTime <= 0 {
 			d.customer.activity = customerExperiencing
 			d.customer.remainingActivityTime = 2000
+			customerExperiencesFlavors(d)
 		}
 
 		if d.customer.activity == customerExperiencing && d.customer.remainingActivityTime <= 0 {
-			getNewOrder(d)
-			d.customer.activity = customerWaiting
-			d.customer.mood = customerMoodNormal
+			d.customer.mood = customerMoodAngry
+
+			if d.reputation > 0 {
+				getNewOrder(d)
+				d.customer.activity = customerWaiting
+				d.customer.mood = customerMoodNormal
+			}
 		}
 
 		if d.customer.animation != nil {
