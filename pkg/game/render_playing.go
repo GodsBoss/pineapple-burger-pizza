@@ -50,10 +50,10 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 
 		// Render customer
 		customerHeadKey := keys.customerHeadNormal
-		switch d.customer.state {
-		case customerStateAngry:
+		switch d.customer.mood {
+		case customerMoodAngry:
 			customerHeadKey = keys.customerHeadAngry
-		case customerStateHappy:
+		case customerMoodHappy:
 			customerHeadKey = keys.customerHeadHappy
 		}
 		renderSprite(customerHeadKey, 35, 0, 0)
