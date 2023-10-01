@@ -66,7 +66,7 @@ func customerGetsPizza(d *data) {
 		d.customer.mood = customerMoodNormal
 		d.reputation--
 	}
-	if rating < -5 { // Very bad pizza.
+	if rating < -3 { // Very bad pizza.
 		d.customer.mood = customerMoodAngry
 		d.reputation--
 	}
