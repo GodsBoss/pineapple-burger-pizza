@@ -53,6 +53,7 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		case customerMoodHappy:
 			customerHeadKey = keys.customerHeadHappy
 		}
+		renderSprite(keys.customerBody, 14, 22, 0)
 		renderSprite(customerHeadKey, 35, 0, 0)
 
 		renderWaitingIngredients(renderSprite, keys, renderText, d.waitingIngredients)

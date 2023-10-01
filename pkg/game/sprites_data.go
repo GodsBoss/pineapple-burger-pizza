@@ -226,6 +226,12 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  40,
 		Height: 32,
 	},
+	"customer_body": {
+		X:      1517,
+		Y:      266,
+		Width:  82,
+		Height: 61,
+	},
 	"help_icon": {
 		X:      400,
 		Y:      32,
