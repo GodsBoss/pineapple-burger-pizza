@@ -136,8 +136,7 @@ var possibleOrders = orders{
 			ingredientAnchovi:     2,
 			ingredientRubberBoots: 1,
 		},
-		fixedForgiveness:  0,
-		randomForgiveness: 0,
+		fixedForgiveness: 1,
 	},
 	"4_1": {
 		pizzaDiameter: 4,
@@ -152,8 +151,7 @@ var possibleOrders = orders{
 			ingredientAnchovi:     2,
 			ingredientRubberBoots: 4,
 		},
-		fixedForgiveness:  0,
-		randomForgiveness: 0,
+		fixedForgiveness: 1,
 	},
 	"4_2": {
 		pizzaDiameter: 4,
@@ -174,6 +172,7 @@ var possibleOrders = orders{
 			ingredientTomatoSauce: 1,
 			ingredientMushroom:    1,
 		},
+		fixedForgiveness: 1,
 	},
 	"5_1": {
 		pizzaDiameter: 5,
@@ -189,8 +188,7 @@ var possibleOrders = orders{
 			ingredientAnchovi:     1,
 			ingredientRubberBoots: 2,
 		},
-		fixedForgiveness:  2,
-		randomForgiveness: 1,
+		fixedForgiveness: 1,
 	},
 	"5_2": {
 		pizzaDiameter: 5,
@@ -201,6 +199,7 @@ var possibleOrders = orders{
 			ingredientBurger: 4,
 			ingredientSalami: 2,
 		},
+		fixedForgiveness: 1,
 	},
 	"5_3": {
 		pizzaDiameter: 5,
@@ -218,5 +217,6 @@ var possibleOrders = orders{
 			ingredientSquid:       3,
 			ingredientAnchovi:     3,
 		},
+		fixedForgiveness: 1,
 	},
 }
