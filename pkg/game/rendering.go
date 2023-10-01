@@ -1,6 +1,8 @@
 package game
 
 import (
+	"strconv"
+
 	"github.com/GodsBoss/gggg/v2/pkg/dom"
 	"github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
 )
@@ -78,5 +80,26 @@ func renderPlacedIngredients(renderSprite renderSpriteFunc, keys spriteKeys, pla
 		offsetY := -placed.height / 2
 
 		renderSprite(keys.ingredients[placed.typ][int(placed.orientation)], placed.x+offsetX, placed.y+offsetY, 0)
+	}
+}
+
+func renderWaitingIngredients(renderSprite renderSpriteFunc, keys spriteKeys, tm *textManager, scale int, output *dom.Context2D, waitingIngredients []waitingIngredient) {
+	for _, ingredient := range waitingIngredients {
+		key := keys.ingredients[ingredient.typ][0]
+		size := ingredientSizes[ingredient.typ]
+
+		amountOffsetX := size.Width/2 - 5
+		amountOffsetY := size.Height
+
+		renderSprite(key, ingredient.x, ingredient.y, 0)
+
+		amountString := "*" + strconv.Itoa(ingredient.amount)
+
+		tm.Create(
+			(ingredient.x+amountOffsetX)*scale,
+			(ingredient.y+amountOffsetY)*scale,
+			scale,
+			[]string{amountString},
+		).Render(output)
 	}
 }

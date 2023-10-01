@@ -54,25 +54,7 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		}
 		renderSprite(customerHeadKey, 35, 0, 0)
 
-		// Render laying ingredients
-		for _, ingredient := range d.waitingIngredients {
-			key := keys.ingredients[ingredient.typ][0]
-			size := ingredientSizes[ingredient.typ]
-
-			amountOffsetX := size.Width/2 - 5
-			amountOffsetY := size.Height
-
-			renderSprite(key, ingredient.x, ingredient.y, 0)
-
-			amountString := "*" + strconv.Itoa(ingredient.amount)
-
-			tm.Create(
-				(ingredient.x+amountOffsetX)*scale,
-				(ingredient.y+amountOffsetY)*scale,
-				scale,
-				[]string{amountString},
-			).Render(output)
-		}
+		renderWaitingIngredients(renderSprite, keys, tm, scale, output, d.waitingIngredients)
 
 		// Render dragged ingredient
 		if d.draggedIngredient != nil {
