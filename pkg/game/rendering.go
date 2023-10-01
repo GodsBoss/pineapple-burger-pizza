@@ -71,3 +71,12 @@ func renderPizza(renderSprite renderSpriteFunc, keys spriteKeys, p pizza) {
 		)
 	}
 }
+
+func renderPlacedIngredients(renderSprite renderSpriteFunc, keys spriteKeys, placeds []placedIngredient) {
+	for _, placed := range placeds {
+		offsetX := -placed.width / 2
+		offsetY := -placed.height / 2
+
+		renderSprite(keys.ingredients[placed.typ][int(placed.orientation)], placed.x+offsetX, placed.y+offsetY, 0)
+	}
+}

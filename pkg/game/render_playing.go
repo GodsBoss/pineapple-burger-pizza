@@ -25,13 +25,7 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		}
 
 		renderPizza(renderSprite, keys, *d.pizza)
-
-		for _, placed := range d.placedIngredients {
-			offsetX := -placed.width / 2
-			offsetY := -placed.height / 2
-
-			renderSprite(keys.ingredients[placed.typ][int(placed.orientation)], placed.x+offsetX, placed.y+offsetY, 0)
-		}
+		renderPlacedIngredients(renderSprite, keys, d.placedIngredients)
 
 		for x := 0; x < w; x++ {
 			for y := 0; y < h; y++ {
