@@ -238,4 +238,10 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  16,
 		Height: 16,
 	},
+	"help_icon_active": {
+		X:      400,
+		Y:      48,
+		Width:  16,
+		Height: 16,
+	},
 }
