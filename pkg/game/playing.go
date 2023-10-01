@@ -20,7 +20,7 @@ func initPlaying(d *data) game.NextState {
 	return game.SameState()
 }
 
-func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.NextState {
+func createReceiveKeyEventPlaying(title game.StateID) func(d *data, event keyboard.Event) game.NextState {
 	return func(d *data, event keyboard.Event) game.NextState {
 		if event.Key == "g" && keyboard.IsUpEvent(event) {
 			d.pizzaGridOverlayVisible = !d.pizzaGridOverlayVisible
@@ -36,6 +36,10 @@ func createReceiveKeyEventPlaying() func(d *data, event keyboard.Event) game.Nex
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, counterClockwise)
 			calculateIngredientTargetFields(d)
+		}
+
+		if event.Key == "q" || event.Key == "Q" {
+			return game.SwitchState(title)
 		}
 
 		// Give pizza to customer.
