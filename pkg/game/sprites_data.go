@@ -214,6 +214,30 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  40,
 		Height: 32,
 	},
+	"squid_0": {
+		X:      0,
+		Y:      256,
+		Width:  40,
+		Height: 48,
+	},
+	"squid_1": {
+		X:      80,
+		Y:      256,
+		Width:  60,
+		Height: 32,
+	},
+	"squid_2": {
+		X:      40,
+		Y:      256,
+		Width:  40,
+		Height: 48,
+	},
+	"squid_3": {
+		X:      140,
+		Y:      256,
+		Width:  60,
+		Height: 32,
+	},
 	"customer_like": {
 		X:      400,
 		Y:      0,

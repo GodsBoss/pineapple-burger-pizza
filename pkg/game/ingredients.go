@@ -27,6 +27,7 @@ const (
 	ingredientMushroom    ingredientType = "mushroom"
 	ingredientRubberBoots ingredientType = "rubber_boots"
 	ingredientSalami      ingredientType = "salami"
+	ingredientSquid       ingredientType = "squid"
 	ingredientTomatoSauce ingredientType = "tomato_sauce"
 )
 
@@ -37,6 +38,7 @@ var ingredientList = []ingredientType{
 	ingredientMushroom,
 	ingredientRubberBoots,
 	ingredientSalami,
+	ingredientSquid,
 	ingredientTomatoSauce,
 }
 
@@ -104,6 +106,13 @@ var ingredientFields = map[ingredientType][]vector2d.Vector[int]{
 		vector2d.Cartesian[int](0, 1),
 		vector2d.Cartesian[int](1, 0),
 		vector2d.Cartesian[int](2, 1),
+	},
+	ingredientSquid: []vector2d.Vector[int]{
+		vector2d.Cartesian[int](0, 0),
+		vector2d.Cartesian[int](0, 1),
+		vector2d.Cartesian[int](0, 2),
+		vector2d.Cartesian[int](1, 0),
+		vector2d.Cartesian[int](1, 1),
 	},
 	ingredientTomatoSauce: []vector2d.Vector[int]{
 		vector2d.Cartesian[int](0, 0),
