@@ -211,7 +211,7 @@ func calculateIngredientTargetFields(d *data) {
 
 // createPizza creates a pizza which is basically a diameter x diameter grid, but the corner pieces are missing.
 // For small diameters, this is "good enough".
-func createPizza(diameter int) *pizza {
+func createPizza(diameter int, leaveCorners bool) *pizza {
 	grid := make([][]pizzaField, diameter)
 
 	for i := range grid {
@@ -221,7 +221,7 @@ func createPizza(diameter int) *pizza {
 	max := diameter - 1
 
 	// Disable corner fields only if diameter > 3.
-	if diameter > 3 {
+	if diameter > 3 && !leaveCorners {
 		grid[0][0].invalid = true
 		grid[max][0].invalid = true
 		grid[0][max].invalid = true

@@ -31,6 +31,8 @@ type order struct {
 	// pizzaDiameter is the pizza diameter for this order.
 	pizzaDiameter int
 
+	leaveCorners bool
+
 	// likes are the flavors the customer desires. If there are at least two preferred flavors, there's a chance one will be deleted.
 	likes map[flavor]int
 
@@ -49,7 +51,7 @@ type order struct {
 
 func (o order) applyTo(d *data) {
 	// Create pizza.
-	d.pizza = createPizza(o.pizzaDiameter)
+	d.pizza = createPizza(o.pizzaDiameter, o.leaveCorners)
 
 	// Create and configure a new customer.
 	d.customer = &customer{
@@ -152,6 +154,26 @@ var possibleOrders = orders{
 		},
 		fixedForgiveness:  0,
 		randomForgiveness: 0,
+	},
+	"4_2": {
+		pizzaDiameter: 4,
+		leaveCorners:  true,
+		likes: map[flavor]int{
+			flavorSweet:    1,
+			flavorCalamari: 1,
+			flavorFish:     4,
+		},
+		dislikes: map[flavor]struct{}{
+			flavorFungus: struct{}{},
+			flavorLiquid: struct{}{},
+		},
+		ingredients: map[ingredientType]int{
+			ingredientAnanas:      1,
+			ingredientAnchovi:     3,
+			ingredientSquid:       2,
+			ingredientTomatoSauce: 1,
+			ingredientMushroom:    1,
+		},
 	},
 	"5_1": {
 		pizzaDiameter: 5,

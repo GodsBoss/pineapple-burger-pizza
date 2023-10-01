@@ -11,7 +11,7 @@ const helpState = "help"
 func initHelp(d *data) game.NextState {
 	d.state = helpState
 	d.readyToPlay = true
-	d.pizza = createPizza(5)
+	d.pizza = createPizza(5, false)
 	d.reputation = 5
 	d.waitingIngredients = []waitingIngredient{
 		{
