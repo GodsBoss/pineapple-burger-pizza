@@ -190,6 +190,30 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  40,
 		Height: 32,
 	},
+	"mushroom_0": {
+		X:      0,
+		Y:      224,
+		Width:  40,
+		Height: 32,
+	},
+	"mushroom_1": {
+		X:      40,
+		Y:      224,
+		Width:  40,
+		Height: 32,
+	},
+	"mushroom_2": {
+		X:      80,
+		Y:      224,
+		Width:  40,
+		Height: 32,
+	},
+	"mushroom_3": {
+		X:      120,
+		Y:      224,
+		Width:  40,
+		Height: 32,
+	},
 	"customer_like": {
 		X:      400,
 		Y:      0,
@@ -234,6 +258,12 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 	},
 	"flavor_liquid": {
 		X:      496,
+		Y:      0,
+		Width:  16,
+		Height: 16,
+	},
+	"flavor_fungus": {
+		X:      512,
 		Y:      0,
 		Width:  16,
 		Height: 16,

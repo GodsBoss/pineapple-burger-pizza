@@ -7,6 +7,7 @@ const (
 	flavorFish     flavor = "fish"
 	flavorLiquid   flavor = "liquid"
 	flavorMeat     flavor = "meat"
+	flavorFungus   flavor = "fungus"
 	flavorSalty    flavor = "salty"
 	flavorSweet    flavor = "sweet"
 )
@@ -17,6 +18,7 @@ var flavorList = []flavor{
 	flavorFish,
 	flavorLiquid,
 	flavorMeat,
+	flavorFungus,
 	flavorSalty,
 	flavorSweet,
 }
@@ -31,6 +33,9 @@ var ingredientFlavors = map[ingredientType]map[flavor]int{
 	},
 	ingredientBurger: {
 		flavorMeat: 1,
+	},
+	ingredientMushroom: {
+		flavorFungus: 1,
 	},
 	ingredientRubberBoots: {
 		flavorCalamari: 1,
