@@ -48,6 +48,11 @@ func initHelp(d *data) game.NextState {
 			x:  210,
 			y:  140,
 		},
+		{
+			id: "hotkeys",
+			x:  194,
+			y:  17,
+		},
 	}
 
 	return game.SameState()
@@ -110,4 +115,5 @@ var helpTexts = map[helpButtonID]string{
 	"customer":    "The customer wants pizza. They like some things (to the left), they hate some things (to the right).\nClick on the customer to give the pizza to them.",
 	"reputation":  "Pizza that does not match the customer's expectations lowers your reputation. If you lose all your reputation, you'll get fired. Good pizza will raise your reputation.",
 	"ingredients": "Ingrediens can be taken from here. You may put them back, unless they're already on the pizza.\nThe ingredient's flavors will be added to the pizza. You can see them when taking one.",
+	"hotkeys":     "Hotkeys:\n\nR: Rotate\nShift+R: Rotate\nG: Toggle grid\nC: Pizza->Customer\nT: Leave help",
 }

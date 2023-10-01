@@ -244,4 +244,10 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  16,
 		Height: 16,
 	},
+	"keyboard": {
+		X:      1500,
+		Y:      0,
+		Width:  43,
+		Height: 14,
+	},
 }

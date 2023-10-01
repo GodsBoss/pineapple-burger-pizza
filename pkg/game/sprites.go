@@ -42,6 +42,8 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	keys.helpIcon = addSprite("help_icon")
 	keys.helpIconActive = addSprite("help_icon_active")
 
+	keys.keyboard = addSprite("keyboard")
+
 	addIngredientSprites := createAddIngredientSprites(spriteMap)
 
 	ingredientKeys := []ingredientType{
@@ -123,6 +125,8 @@ type spriteKeys struct {
 
 	helpIcon       r.SpriteKey
 	helpIconActive r.SpriteKey
+
+	keyboard r.SpriteKey
 
 	ingredients map[ingredientType][4]r.SpriteKey
 	flavors     map[flavor]r.SpriteKey
