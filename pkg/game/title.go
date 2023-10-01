@@ -14,8 +14,12 @@ func initTitle(d *data) game.NextState {
 	return game.SameState()
 }
 
-func createReceiveTitle(playingState game.StateID) func(d *data, ev keyboard.Event) game.NextState {
+func createReceiveTitle(helpState game.StateID, playingState game.StateID) func(d *data, ev keyboard.Event) game.NextState {
 	return func(d *data, ev keyboard.Event) game.NextState {
+		if ev.Key == "h" || ev.Key == "H" {
+			return game.SwitchState(helpState)
+		}
+
 		if ev.Key == "p" {
 			return game.SwitchState(playingState)
 		}

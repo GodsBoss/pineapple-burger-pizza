@@ -19,6 +19,7 @@ func New(img *dom.Image) *Game {
 
 	// Define states.
 	title := tmpl.AddState()
+	help := tmpl.AddState()
 	playing := tmpl.AddState()
 	gameOver := tmpl.AddState()
 
@@ -26,8 +27,12 @@ func New(img *dom.Image) *Game {
 
 	title.
 		SetInitHandler(initTitle).
-		SetKeyboardHandler(createReceiveTitle(playing.ID())).
+		SetKeyboardHandler(createReceiveTitle(help.ID(), playing.ID())).
 		SetTickHandler(createReceiveTickEventTitle())
+
+	help.
+		SetInitHandler(initHelp).
+		SetKeyboardHandler(createReceiveKeyEventHelp(title.ID(), playing.ID()))
 
 	playing.
 		SetInitHandler(initPlaying).
@@ -50,6 +55,7 @@ func New(img *dom.Image) *Game {
 
 	r.
 		AddStateRenderer(titleState, stateRendererFunc(renderTitle(spriteMap, keys, tm))).
+		AddStateRenderer(helpState, stateRendererFunc(renderHelp(spriteMap, keys, tm))).
 		AddStateRenderer(playingState, stateRendererFunc(renderPlaying(spriteMap, keys, tm))).
 		AddStateRenderer(gameOverState, stateRendererFunc(renderGameOver(spriteMap, keys, tm)))
 
