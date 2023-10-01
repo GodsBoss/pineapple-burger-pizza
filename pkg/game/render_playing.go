@@ -161,13 +161,13 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				spriteMap.CreateSprite(
 					keys.flavors[fl],
 					canvas2drendering.SpriteAttributes{},
-					20*scale,
+					3*scale,
 					(20+pos*18)*scale,
 					scale,
 					0,
 				).Render(output)
 				tm.Create(
-					40*scale,
+					20*scale,
 					(25+pos*18)*scale,
 					scale,
 					[]string{"*" + strconv.Itoa(amount)},
@@ -179,7 +179,7 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			spriteMap.CreateSprite(
 				keys.customerLike,
 				canvas2drendering.SpriteAttributes{},
-				20*scale,
+				3*scale,
 				2*scale,
 				scale,
 				0,
