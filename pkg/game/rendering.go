@@ -124,3 +124,16 @@ func renderCustomerLikes(renderSprite renderSpriteFunc, keys spriteKeys, renderT
 		renderSprite(keys.customerLike, 3, 2, 0)
 	}
 }
+
+func renderCustomerDislikes(renderSprite renderSpriteFunc, keys spriteKeys, dislikes map[flavor]struct{}) {
+	pos := 0
+	for _, fl := range flavorList {
+		if _, ok := dislikes[fl]; ok {
+			renderSprite(keys.flavors[fl], 92, 20+pos*18, 0)
+			pos++
+		}
+	}
+	if len(dislikes) > 0 {
+		renderSprite(keys.customerDislike, 92, 2, 0)
+	}
+}

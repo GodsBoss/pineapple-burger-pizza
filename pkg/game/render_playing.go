@@ -90,21 +90,10 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		}
 
 		renderCustomerLikes(renderSprite, keys, renderText, d.customer.likes)
-
-		// Render customer dislikes.
-		pos := 0
-		for _, fl := range flavorList {
-			if _, ok := d.customer.dislikes[fl]; ok {
-				renderSprite(keys.flavors[fl], 92, 20+pos*18, 0)
-				pos++
-			}
-		}
-		if len(d.customer.dislikes) > 0 {
-			renderSprite(keys.customerDislike, 92, 2, 0)
-		}
+		renderCustomerDislikes(renderSprite, keys, d.customer.dislikes)
 
 		// Render pizza flavors.
-		pos = 0
+		pos := 0
 		for _, fl := range flavorList {
 			pizzaAmount, isOnPizza := d.pizza.flavors[fl]
 			var ingredientAmount int
