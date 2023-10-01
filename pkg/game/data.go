@@ -37,4 +37,7 @@ type data struct {
 
 	// helpText is the text shown as help.
 	helpText string
+
+	// readyToPlay determines whether the player is ready to play. This becomes true after reading help or playing.
+	readyToPlay bool
 }

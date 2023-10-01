@@ -7,6 +7,8 @@ import (
 
 func renderTitle(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *textManager) stateRendererFunc {
 	return func(output *dom.Context2D, d *data, scale int) {
+		renderText := createRenderText(tm, output, scale)
+
 		s := spriteMap.CreateSprite(
 			keys.backgroundTitle,
 			canvas2drendering.SpriteAttributes{},
@@ -16,5 +18,10 @@ func renderTitle(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *tex
 			0,
 		)
 		s.Render(output)
+
+		renderText(5, 188, []string{"Press 'H' for help"})
+		if d.readyToPlay {
+			renderText(5, 177, []string{"Press 'P' to play"})
+		}
 	}
 }
