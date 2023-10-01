@@ -3,10 +3,10 @@ package game
 type flavor string
 
 const (
-	flavorSweet    flavor = "sweet"
 	flavorCalamari flavor = "calamari"
-	flavorSalty    flavor = "salty"
 	flavorFish     flavor = "fish"
+	flavorSalty    flavor = "salty"
+	flavorSweet    flavor = "sweet"
 )
 
 // flavorList provides a consistent sort order for flavors. This is useful as maps don't have an inherent sort order.
