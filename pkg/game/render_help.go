@@ -16,5 +16,6 @@ func renderHelp(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *text
 		renderSprite(keys.customerHeadNormal, 35, 0, 0)
 		renderPizza(renderSprite, keys, *d.pizza)
 		renderWaitingIngredients(renderSprite, keys, renderText, d.waitingIngredients)
+		renderReputation(renderSprite, keys, d.reputation)
 	}
 }

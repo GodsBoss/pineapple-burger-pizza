@@ -10,6 +10,7 @@ const helpState = "help"
 func initHelp(d *data) game.NextState {
 	d.state = helpState
 	d.pizza = createPizza(5)
+	d.reputation = 5
 
 	return game.SameState()
 }
