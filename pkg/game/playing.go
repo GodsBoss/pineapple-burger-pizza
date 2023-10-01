@@ -109,6 +109,20 @@ func createReceiveTickEventPlaying(gameOverState game.StateID) func(d *data, eve
 		if d.reputation <= 0 {
 			return game.SwitchState(gameOverState)
 		}
+
+		if d.customer.activity != customerWaiting {
+			d.customer.remainingActivityTime -= event.MsSinceLastTick
+		}
+
+		if d.customer.activity == customerEating && d.customer.remainingActivityTime <= 0 {
+			d.customer.activity = customerExperiencing
+			d.customer.remainingActivityTime = 2000
+		}
+
+		if d.customer.activity == customerExperiencing && d.customer.remainingActivityTime <= 0 {
+			d.customer.activity = customerWaiting
+		}
+
 		return game.SameState()
 	}
 }

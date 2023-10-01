@@ -12,6 +12,12 @@ type customer struct {
 
 	// mood is the customer's mood. This is influenced
 	mood customerMood
+
+	// activity is the customer's current activity.
+	activity customerActivity
+
+	// remainingActivityTime is the remaining time for activities in ms.
+	remainingActivityTime int
 }
 
 type customerMood string
@@ -40,6 +46,9 @@ func (c customer) ratePizza(p pizza) int {
 }
 
 func customerGetsPizza(d *data) {
+	d.customer.activity = customerEating
+	d.customer.remainingActivityTime = 2000
+
 	rating := d.customer.ratePizza(*d.pizza) + d.customer.forgiveness
 	if rating > 0 {
 		d.reputation++
@@ -58,3 +67,16 @@ func customerGetsPizza(d *data) {
 	}
 	d.score += scoreForRating(rating)
 }
+
+type customerActivity string
+
+const (
+	// customerWaiting is the customer's activity when waiting for the pizza.
+	customerWaiting customerActivity = "waiting"
+
+	// customerEating is the customer eating.
+	customerEating customerActivity = "eating"
+
+	// customerExperiencing is the customer experiencing the flavors of the pizza.
+	customerExperiencing customerActivity = "experiencing"
+)

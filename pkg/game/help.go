@@ -30,6 +30,8 @@ func initHelp(d *data) game.NextState {
 			flavorSweet: struct{}{},
 			flavorFish:  struct{}{},
 		},
+		mood:     customerMoodNormal,
+		activity: customerWaiting,
 	}
 	d.helpText = ""
 	d.helpButtons = []helpButton{
