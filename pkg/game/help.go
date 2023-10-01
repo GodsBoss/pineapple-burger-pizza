@@ -11,6 +11,14 @@ func initHelp(d *data) game.NextState {
 	d.state = helpState
 	d.pizza = createPizza(5)
 	d.reputation = 5
+	d.waitingIngredients = []waitingIngredient{
+		{
+			typ:    ingredientAnchovi,
+			amount: 3,
+			x:      220 - ingredientSizes[ingredientAnchovi].Width/2,
+			y:      180 - ingredientSizes[ingredientAnchovi].Height,
+		},
+	}
 
 	return game.SameState()
 }
