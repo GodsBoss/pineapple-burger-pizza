@@ -15,7 +15,8 @@ func (os orders) randomOrder(d *data) {
 		keys = append(keys, key)
 	}
 
-	os[keys[rand.Intn(len(keys))]].applyTo(d)
+	key := keys[rand.Intn(len(keys))]
+	os[key].applyTo(d)
 }
 
 var ingredientPositions = []vector2d.Vector[int]{
