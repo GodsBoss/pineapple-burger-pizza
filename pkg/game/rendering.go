@@ -110,3 +110,17 @@ func renderWaitingIngredients(renderSprite renderSpriteFunc, keys spriteKeys, re
 		)
 	}
 }
+
+func renderCustomerLikes(renderSprite renderSpriteFunc, keys spriteKeys, renderText renderTextFunc, likes map[flavor]int) {
+	pos := 0
+	for _, fl := range flavorList {
+		if amount, ok := likes[fl]; ok {
+			renderSprite(keys.flavors[fl], 3, 20+pos*18, 0)
+			renderText(20, 25+pos*18, []string{"*" + strconv.Itoa(amount)})
+			pos++
+		}
+	}
+	if len(likes) > 0 {
+		renderSprite(keys.customerLike, 3, 2, 0)
+	}
+}

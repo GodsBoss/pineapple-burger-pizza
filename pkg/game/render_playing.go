@@ -89,26 +89,10 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			}
 		}
 
-		// Render customer likes.
-		pos := 0
-		for _, fl := range flavorList {
-			if amount, ok := d.customer.likes[fl]; ok {
-				renderSprite(keys.flavors[fl], 3, 20+pos*18, 0)
-				tm.Create(
-					20*scale,
-					(25+pos*18)*scale,
-					scale,
-					[]string{"*" + strconv.Itoa(amount)},
-				).Render(output)
-				pos++
-			}
-		}
-		if len(d.customer.likes) > 0 {
-			renderSprite(keys.customerLike, 3, 2, 0)
-		}
+		renderCustomerLikes(renderSprite, keys, renderText, d.customer.likes)
 
 		// Render customer dislikes.
-		pos = 0
+		pos := 0
 		for _, fl := range flavorList {
 			if _, ok := d.customer.dislikes[fl]; ok {
 				renderSprite(keys.flavors[fl], 92, 20+pos*18, 0)
