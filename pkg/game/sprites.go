@@ -47,13 +47,7 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 
 	addIngredientSprites := createAddIngredientSprites(spriteMap)
 
-	ingredientKeys := []ingredientType{
-		ingredientAnanas,
-		ingredientAnchovi,
-		ingredientRubberBoots,
-	}
-
-	for _, ingredientKey := range ingredientKeys {
+	for _, ingredientKey := range ingredientList {
 		keys.ingredients[ingredientKey] = addIngredientSprites(string(ingredientKey))
 	}
 

@@ -40,4 +40,8 @@ type data struct {
 
 	// readyToPlay determines whether the player is ready to play. This becomes true after reading help or playing.
 	readyToPlay bool
+
+	titleIngredientIndex int
+
+	titleRemainingIngredientTime int
 }

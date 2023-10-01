@@ -10,6 +10,8 @@ const titleState = "title"
 
 func initTitle(d *data) game.NextState {
 	d.state = titleState
+	d.titleIngredientIndex = 0
+	d.titleRemainingIngredientTime = timeBetweenTitleIngredientSwitch
 
 	return game.SameState()
 }
@@ -30,6 +32,20 @@ func createReceiveTitle(helpState game.StateID, playingState game.StateID) func(
 
 func createReceiveTickEventTitle() func(d *data, event tick.Event) game.NextState {
 	return func(d *data, event tick.Event) game.NextState {
+		d.titleRemainingIngredientTime -= event.MsSinceLastTick
+
+		if d.titleRemainingIngredientTime < 0 {
+			d.titleIngredientIndex++
+			if d.titleIngredientIndex >= len(ingredientList) {
+				d.titleIngredientIndex = 0
+			}
+			d.titleRemainingIngredientTime = timeBetweenTitleIngredientSwitch
+		}
+
 		return game.SameState()
 	}
 }
+
+const (
+	timeBetweenTitleIngredientSwitch = 1000
+)

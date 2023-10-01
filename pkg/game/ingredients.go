@@ -27,6 +27,12 @@ const (
 	ingredientRubberBoots ingredientType = "rubber_boots"
 )
 
+var ingredientList = []ingredientType{
+	ingredientAnanas,
+	ingredientAnchovi,
+	ingredientRubberBoots,
+}
+
 // ingredientSizes are the sizes for waiting ingredients.
 var ingredientSizes = func(fieldsPerIngredientType map[ingredientType][]vector2d.Vector[int]) map[ingredientType]size {
 
