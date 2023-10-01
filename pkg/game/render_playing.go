@@ -193,8 +193,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				spriteMap.CreateSprite(
 					keys.flavors[fl],
 					canvas2drendering.SpriteAttributes{},
-					(140+24*pos)*scale,
-					30*scale,
+					92*scale,
+					(20+pos*18)*scale,
 					scale,
 					0,
 				).Render(output)
@@ -205,8 +205,8 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			spriteMap.CreateSprite(
 				keys.customerDislike,
 				canvas2drendering.SpriteAttributes{},
-				116*scale,
-				30*scale,
+				92*scale,
+				2*scale,
 				scale,
 				0,
 			).Render(output)
