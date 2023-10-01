@@ -67,7 +67,7 @@ type renderTextFunc func(x int, y int, contents []string)
 
 func createRenderText(tm *textManager, output *dom.Context2D, scale int) func(x int, y int, contents []string) {
 	return func(x int, y int, contents []string) {
-		tm.Create(x*scale, y*scale, scale, contents)
+		tm.Create(x*scale, y*scale, scale, contents).Render(output)
 	}
 }
 
