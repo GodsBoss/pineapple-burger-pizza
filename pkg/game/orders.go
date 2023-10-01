@@ -138,6 +138,22 @@ var possibleOrders = orders{
 		},
 		fixedForgiveness: 1,
 	},
+	"3_2": {
+		pizzaDiameter: 3,
+		likes: map[flavor]int{
+			flavorFungus: 1,
+			flavorLiquid: 1,
+		},
+		dislikes: map[flavor]struct{}{
+			flavorMeat: struct{}{},
+		},
+		ingredients: map[ingredientType]int{
+			ingredientTomatoSauce: 1,
+			ingredientMushroom:    1,
+			ingredientRubberBoots: 1,
+		},
+		fixedForgiveness: 1,
+	},
 	"4_1": {
 		pizzaDiameter: 4,
 		likes: map[flavor]int{
