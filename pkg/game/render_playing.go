@@ -5,6 +5,7 @@ import (
 
 	"github.com/GodsBoss/gggg/v2/pkg/dom"
 	"github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
+	"github.com/GodsBoss/pineapple-burger-pizza/pkg/minifmt"
 )
 
 func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *textManager) stateRendererFunc {
@@ -260,6 +261,14 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				scale,
 				0,
 			).Render(output)
+		}
+
+		// Render score
+		tm.Create(200*scale, 2*scale, scale, []string{"score: " + minifmt.FormatInt(d.score, 6, " ")}).Render(output)
+
+		// Render hiscore
+		if d.highscore > 0 {
+			tm.Create(188*scale, 10*scale, scale, []string{"hiscore: " + minifmt.FormatInt(d.highscore, 6, " ")}).Render(output)
 		}
 	}
 }
