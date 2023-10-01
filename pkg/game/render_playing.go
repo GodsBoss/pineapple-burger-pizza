@@ -11,6 +11,7 @@ import (
 func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *textManager) stateRendererFunc {
 	return func(output *dom.Context2D, d *data, scale int) {
 		renderSprite := createRenderSprite(spriteMap, output, scale)
+		renderText := createRenderText(tm, output, scale)
 
 		renderSprite(keys.backgroundPlaying, 0, 0, 0)
 
@@ -54,7 +55,7 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		}
 		renderSprite(customerHeadKey, 35, 0, 0)
 
-		renderWaitingIngredients(renderSprite, keys, tm, scale, output, d.waitingIngredients)
+		renderWaitingIngredients(renderSprite, keys, renderText, d.waitingIngredients)
 
 		// Render dragged ingredient
 		if d.draggedIngredient != nil {

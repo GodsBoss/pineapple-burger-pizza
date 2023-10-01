@@ -63,6 +63,14 @@ func createRenderSprite(spriteMap canvas2drendering.SpriteMap, output *dom.Conte
 	}
 }
 
+type renderTextFunc func(x int, y int, contents []string)
+
+func createRenderText(tm *textManager, output *dom.Context2D, scale int) func(x int, y int, contents []string) {
+	return func(x int, y int, contents []string) {
+		tm.Create(x*scale, y*scale, scale, contents)
+	}
+}
+
 func renderPizza(renderSprite renderSpriteFunc, keys spriteKeys, p pizza) {
 	if pizzaKey, ok := keys.pizzas[p.Width()]; ok {
 		renderSprite(
@@ -83,7 +91,7 @@ func renderPlacedIngredients(renderSprite renderSpriteFunc, keys spriteKeys, pla
 	}
 }
 
-func renderWaitingIngredients(renderSprite renderSpriteFunc, keys spriteKeys, tm *textManager, scale int, output *dom.Context2D, waitingIngredients []waitingIngredient) {
+func renderWaitingIngredients(renderSprite renderSpriteFunc, keys spriteKeys, renderText renderTextFunc, waitingIngredients []waitingIngredient) {
 	for _, ingredient := range waitingIngredients {
 		key := keys.ingredients[ingredient.typ][0]
 		size := ingredientSizes[ingredient.typ]
@@ -95,11 +103,10 @@ func renderWaitingIngredients(renderSprite renderSpriteFunc, keys spriteKeys, tm
 
 		amountString := "*" + strconv.Itoa(ingredient.amount)
 
-		tm.Create(
-			(ingredient.x+amountOffsetX)*scale,
-			(ingredient.y+amountOffsetY)*scale,
-			scale,
+		renderText(
+			ingredient.x+amountOffsetX,
+			ingredient.y+amountOffsetY,
 			[]string{amountString},
-		).Render(output)
+		)
 	}
 }
