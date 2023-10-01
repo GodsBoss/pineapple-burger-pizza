@@ -60,6 +60,7 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	flavors := []flavor{
 		flavorCalamari,
 		flavorFish,
+		flavorMeat,
 		flavorSalty,
 		flavorSweet,
 	}
