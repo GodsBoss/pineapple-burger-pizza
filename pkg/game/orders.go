@@ -169,4 +169,14 @@ var possibleOrders = orders{
 		fixedForgiveness:  2,
 		randomForgiveness: 1,
 	},
+	"5_2": {
+		pizzaDiameter: 5,
+		likes: map[flavor]int{
+			flavorMeat: 4,
+		},
+		ingredients: map[ingredientType]int{
+			ingredientBurger: 4,
+			ingredientSalami: 2,
+		},
+	},
 }
