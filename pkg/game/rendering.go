@@ -53,8 +53,21 @@ func (f stateRendererFunc) Render(output *dom.Context2D, d *data, scale int) {
 	f(output, d, scale)
 }
 
+type renderSpriteFunc func(key canvas2drendering.SpriteKey, x int, y int, frame int)
+
 func createRenderSprite(spriteMap canvas2drendering.SpriteMap, output *dom.Context2D, scale int) func(key canvas2drendering.SpriteKey, x int, y int, frame int) {
 	return func(key canvas2drendering.SpriteKey, x int, y int, frame int) {
 		spriteMap.CreateSprite(key, canvas2drendering.SpriteAttributes{}, x*scale, y*scale, scale, frame).Render(output)
+	}
+}
+
+func renderPizza(renderSprite renderSpriteFunc, keys spriteKeys, p pizza) {
+	if pizzaKey, ok := keys.pizzas[p.Width()]; ok {
+		renderSprite(
+			pizzaKey,
+			(160 - p.Width()*pizzaFieldWidth/2),
+			(100 - p.Height()*pizzaFieldHeight/2),
+			0,
+		)
 	}
 }
