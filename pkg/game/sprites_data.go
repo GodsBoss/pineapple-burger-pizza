@@ -142,6 +142,30 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  40,
 		Height: 48,
 	},
+	"salami_0": {
+		X:      160,
+		Y:      80,
+		Width:  60,
+		Height: 32,
+	},
+	"salami_1": {
+		X:      240,
+		Y:      112,
+		Width:  40,
+		Height: 48,
+	},
+	"salami_2": {
+		X:      220,
+		Y:      80,
+		Width:  60,
+		Height: 32,
+	},
+	"salami_3": {
+		X:      240,
+		Y:      160,
+		Width:  40,
+		Height: 48,
+	},
 	"customer_like": {
 		X:      400,
 		Y:      0,
