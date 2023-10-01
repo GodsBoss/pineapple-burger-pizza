@@ -43,14 +43,21 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 
 		// Render customer
 		customerHeadKey := keys.customerHeadNormal
-		switch d.customer.mood {
-		case customerMoodAngry:
-			customerHeadKey = keys.customerHeadAngry
-		case customerMoodHappy:
-			customerHeadKey = keys.customerHeadHappy
+		customerAnimationFrame := 0
+		if d.customer.activity == customerExperiencing {
+			switch d.customer.mood {
+			case customerMoodAngry:
+				customerHeadKey = keys.customerHeadAngry
+			case customerMoodHappy:
+				customerHeadKey = keys.customerHeadHappy
+			}
+		}
+		if d.customer.activity == customerEating {
+			customerHeadKey = keys.customerHeadEating
+			customerAnimationFrame = d.customer.animation.Frame()
 		}
 		renderSprite(keys.customerBody, 14, 22, 0)
-		renderSprite(customerHeadKey, 35, 0, 0)
+		renderSprite(customerHeadKey, 35, 0, customerAnimationFrame)
 
 		renderWaitingIngredients(renderSprite, keys, renderText, d.waitingIngredients)
 

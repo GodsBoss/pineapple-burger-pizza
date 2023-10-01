@@ -1,5 +1,7 @@
 package game
 
+import "github.com/GodsBoss/pineapple-burger-pizza/pkg/animation"
+
 type customer struct {
 	// likes determines what the customer expects from their pizza. Every missing flavor lets the rating suffer.
 	likes map[flavor]int
@@ -18,6 +20,8 @@ type customer struct {
 
 	// remainingActivityTime is the remaining time for activities in ms.
 	remainingActivityTime int
+
+	animation animation.Frames
 }
 
 type customerMood string
@@ -48,6 +52,7 @@ func (c customer) ratePizza(p pizza) int {
 func customerGetsPizza(d *data) {
 	d.customer.activity = customerEating
 	d.customer.remainingActivityTime = 2000
+	d.customer.animation = animation.NewFrames(3, 300)
 
 	rating := d.customer.ratePizza(*d.pizza) + d.customer.forgiveness
 	if rating > 0 {
@@ -55,11 +60,14 @@ func customerGetsPizza(d *data) {
 		if d.reputation > 10 {
 			d.reputation = 10
 		}
+		d.customer.mood = customerMoodHappy
 	}
 	if rating < 0 { // Bad pizza.
+		d.customer.mood = customerMoodNormal
 		d.reputation--
 	}
 	if rating < -5 { // Very bad pizza.
+		d.customer.mood = customerMoodAngry
 		d.reputation--
 	}
 	if d.reputation < 0 {
@@ -80,3 +88,15 @@ const (
 	// customerExperiencing is the customer experiencing the flavors of the pizza.
 	customerExperiencing customerActivity = "experiencing"
 )
+
+func (c customer) isWaiting() bool {
+	return c.activity == customerWaiting
+}
+
+func (c customer) isEating() bool {
+	return c.activity == customerEating
+}
+
+func (c customer) isExperiencing() bool {
+	return c.activity == customerExperiencing
+}

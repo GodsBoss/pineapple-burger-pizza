@@ -27,13 +27,13 @@ func createReceiveKeyEventPlaying(title game.StateID) func(d *data, event keyboa
 			d.pizzaGridOverlayVisible = !d.pizzaGridOverlayVisible
 		}
 
-		if event.Key == "r" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
+		if event.Key == "r" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil && d.customer.isWaiting() {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, clockwise)
 			calculateIngredientTargetFields(d)
 		}
 
-		if event.Key == "R" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil {
+		if event.Key == "R" && keyboard.IsDownEvent(event) && d.draggedIngredient != nil && d.customer.isWaiting() {
 			d.draggedIngredient.orientation = (d.draggedIngredient.orientation + ingredientCounterClockwise) % 4
 			d.draggedIngredient.fields = rotateFields(d.draggedIngredient.fields, counterClockwise)
 			calculateIngredientTargetFields(d)
@@ -44,9 +44,8 @@ func createReceiveKeyEventPlaying(title game.StateID) func(d *data, event keyboa
 		}
 
 		// Give pizza to customer.
-		if event.Key == "c" && keyboard.IsDownEvent(event) {
+		if event.Key == "c" && keyboard.IsDownEvent(event) && d.customer.isWaiting() {
 			customerGetsPizza(d)
-			getNewOrder(d)
 		}
 
 		return game.SameState()
@@ -55,7 +54,7 @@ func createReceiveKeyEventPlaying(title game.StateID) func(d *data, event keyboa
 
 func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.NextState {
 	return func(d *data, event mouse.Event) game.NextState {
-		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) {
+		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) && d.customer.isWaiting() {
 			if d.draggedIngredient != nil && d.draggedIngredient.isValidPlacement() {
 				placeIngredient(d)
 				return game.SameState()
@@ -87,9 +86,8 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 		}
 
 		if mouse.IsPrimaryButtonEvent(event) && mouse.IsUpEvent(event) {
-			if event.X > 10 && event.X < 100 && event.Y > 0 && event.Y < 50 {
+			if event.X > 10 && event.X < 100 && event.Y > 0 && event.Y < 50 && d.customer.isWaiting() {
 				customerGetsPizza(d)
-				getNewOrder(d)
 			}
 		}
 
@@ -120,7 +118,13 @@ func createReceiveTickEventPlaying(gameOverState game.StateID) func(d *data, eve
 		}
 
 		if d.customer.activity == customerExperiencing && d.customer.remainingActivityTime <= 0 {
+			getNewOrder(d)
 			d.customer.activity = customerWaiting
+			d.customer.mood = customerMoodNormal
+		}
+
+		if d.customer.animation != nil {
+			d.customer.animation.Tick(event.MsSinceLastTick)
 		}
 
 		return game.SameState()

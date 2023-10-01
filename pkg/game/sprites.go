@@ -37,6 +37,7 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 	keys.customerHeadNormal = addSprite("customer_head_normal")
 	keys.customerHeadAngry = addSprite("customer_head_angry")
 	keys.customerHeadHappy = addSprite("customer_head_happy")
+	keys.customerHeadEating = addSprite("customer_head_eating")
 	keys.customerBody = addSprite("customer_body")
 
 	keys.helpIcon = addSprite("help_icon")
@@ -121,6 +122,7 @@ type spriteKeys struct {
 	customerHeadNormal r.SpriteKey
 	customerHeadAngry  r.SpriteKey
 	customerHeadHappy  r.SpriteKey
+	customerHeadEating r.SpriteKey
 	customerBody       r.SpriteKey
 
 	helpIcon       r.SpriteKey
