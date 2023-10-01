@@ -98,6 +98,13 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 			}
 		}
 
+		if mouse.IsPrimaryButtonEvent(event) && mouse.IsUpEvent(event) {
+			if event.X > 10 && event.X < 100 && event.Y > 0 && event.Y < 50 {
+				customerGetsPizza(d)
+				getNewOrder(d)
+			}
+		}
+
 		if mouse.IsMoveEvent(event) && d.draggedIngredient != nil {
 			d.draggedIngredient.x = event.X
 			d.draggedIngredient.y = event.Y
