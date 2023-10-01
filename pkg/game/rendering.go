@@ -137,3 +137,13 @@ func renderCustomerDislikes(renderSprite renderSpriteFunc, keys spriteKeys, disl
 		renderSprite(keys.customerDislike, 92, 2, 0)
 	}
 }
+
+func renderReputation(renderSprite renderSpriteFunc, keys spriteKeys, reputation int) {
+	for y := 0; y < 10; y++ {
+		key := keys.reputationOK
+		if reputation <= y {
+			key = keys.reputationGone
+		}
+		renderSprite(key, 300, 10+18*y, 0)
+	}
+}
