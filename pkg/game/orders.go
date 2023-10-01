@@ -55,6 +55,7 @@ func (o order) applyTo(d *data) {
 		likes:       make(map[flavor]int),
 		dislikes:    make(map[flavor]struct{}),
 		forgiveness: o.fixedForgiveness,
+		state:       customerStateNormal,
 	}
 	for fl := range o.likes {
 		d.customer.likes[fl] = o.likes[fl]

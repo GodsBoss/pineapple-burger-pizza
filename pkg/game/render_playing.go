@@ -73,6 +73,23 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 			}
 		}
 
+		// Render customer
+		customerHeadKey := keys.customerHeadNormal
+		switch d.customer.state {
+		case customerStateAngry:
+			customerHeadKey = keys.customerHeadAngry
+		case customerStateHappy:
+			customerHeadKey = keys.customerHeadHappy
+		}
+		spriteMap.CreateSprite(
+			customerHeadKey,
+			canvas2drendering.SpriteAttributes{},
+			35*scale,
+			0,
+			scale,
+			0,
+		).Render(output)
+
 		// Render laying ingredients
 		for _, ingredient := range d.waitingIngredients {
 			key := keys.ingredients[ingredient.typ][0]

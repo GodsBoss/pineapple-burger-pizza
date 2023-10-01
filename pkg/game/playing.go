@@ -426,7 +426,18 @@ type customer struct {
 
 	// forgiveness is the customer's tolerance for bad pizza.
 	forgiveness int
+
+	// state is the customer's state. This is influenced
+	state customerState
 }
+
+type customerState string
+
+const (
+	customerStateNormal customerState = "normal"
+	customerStateAngry  customerState = "angry"
+	customerStateHappy  customerState = "happy"
+)
 
 // ratePizza lets the customer rate a pizza. The best possible rating is 0. Usually, ratings are negative.
 func (c customer) ratePizza(p pizza) int {
