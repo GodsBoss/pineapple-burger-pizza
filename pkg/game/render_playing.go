@@ -215,7 +215,12 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		// Render pizza flavors.
 		pos = 0
 		for _, fl := range flavorList {
-			if amount, ok := d.pizza.flavors[fl]; ok {
+			pizzaAmount, isOnPizza := d.pizza.flavors[fl]
+			var ingredientAmount int
+			if d.draggedIngredient != nil {
+				ingredientAmount = ingredientFlavors[d.draggedIngredient.typ][fl]
+			}
+			if isOnPizza || ingredientAmount > 0 {
 				spriteMap.CreateSprite(
 					keys.flavors[fl],
 					canvas2drendering.SpriteAttributes{},
@@ -224,11 +229,18 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 					scale,
 					0,
 				).Render(output)
+				content := ""
+				if pizzaAmount > 0 {
+					content += "*" + strconv.Itoa(pizzaAmount)
+				}
+				if ingredientAmount > 0 {
+					content += "+" + strconv.Itoa(ingredientAmount)
+				}
 				tm.Create(
 					(180+w*pizzaFieldWidth/2)*scale,
 					(105-h*pizzaFieldHeight/2+pos*18)*scale,
 					scale,
-					[]string{"*" + strconv.Itoa(amount)},
+					[]string{content},
 				).Render(output)
 				pos++
 			}
