@@ -126,6 +126,7 @@ func placeIngredient(d *data) {
 			height:      d.draggedIngredient.Height(),
 		},
 	)
+	d.score += scoreForPlacedIngredient(*d.draggedIngredient)
 	d.draggedIngredient = nil
 }
 
@@ -484,4 +485,5 @@ func customerGetsPizza(d *data) {
 	if d.reputation < 0 {
 		d.reputation = 0
 	}
+	d.score += scoreForRating(rating)
 }
