@@ -19,6 +19,16 @@ func initHelp(d *data) game.NextState {
 			y:      180 - ingredientSizes[ingredientAnchovi].Height,
 		},
 	}
+	d.customer = &customer{
+		likes: map[flavor]int{
+			flavorSalty:    2,
+			flavorCalamari: 1,
+		},
+		dislikes: map[flavor]struct{}{
+			flavorSweet: struct{}{},
+			flavorFish:  struct{}{},
+		},
+	}
 
 	return game.SameState()
 }
