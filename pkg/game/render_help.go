@@ -8,7 +8,10 @@ import (
 func renderHelp(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *textManager) stateRendererFunc {
 	return func(output *dom.Context2D, d *data, scale int) {
 		renderSprite := createRenderSprite(spriteMap, output, scale)
+		renderText := createRenderText(tm, output, scale)
+
 		renderSprite(keys.backgroundTable, 0, 0, 0)
 		renderPizza(renderSprite, keys, *d.pizza)
+		renderWaitingIngredients(renderSprite, keys, renderText, d.waitingIngredients)
 	}
 }
