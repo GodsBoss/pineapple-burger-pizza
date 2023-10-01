@@ -50,7 +50,7 @@ func initHelp(d *data) game.NextState {
 		},
 		{
 			id: "hotkeys",
-			x:  194,
+			x:  195,
 			y:  17,
 		},
 	}
