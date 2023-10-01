@@ -11,6 +11,9 @@ func renderHelp(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *text
 		renderText := createRenderText(tm, output, scale)
 
 		renderSprite(keys.backgroundTable, 0, 0, 0)
+
+		renderSprite(keys.customerBody, 14, 22, 0)
+		renderSprite(keys.customerHeadNormal, 35, 0, 0)
 		renderPizza(renderSprite, keys, *d.pizza)
 		renderWaitingIngredients(renderSprite, keys, renderText, d.waitingIngredients)
 	}
