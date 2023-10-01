@@ -5,6 +5,7 @@ type flavor string
 const (
 	flavorCalamari flavor = "calamari"
 	flavorFish     flavor = "fish"
+	flavorLiquid   flavor = "liquid"
 	flavorMeat     flavor = "meat"
 	flavorSalty    flavor = "salty"
 	flavorSweet    flavor = "sweet"
@@ -14,6 +15,7 @@ const (
 var flavorList = []flavor{
 	flavorCalamari,
 	flavorFish,
+	flavorLiquid,
 	flavorMeat,
 	flavorSalty,
 	flavorSweet,
