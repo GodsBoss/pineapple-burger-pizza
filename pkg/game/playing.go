@@ -244,6 +244,7 @@ type ingredientType string
 const (
 	ingredientAnchovi     ingredientType = "anchovy"
 	ingredientAnanas      ingredientType = "ananas"
+	ingredientBurger      ingredientType = "burger"
 	ingredientRubberBoots ingredientType = "rubber_boots"
 )
 
