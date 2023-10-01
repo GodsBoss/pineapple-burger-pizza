@@ -16,7 +16,7 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Width:  320,
 		Height: 200,
 	},
-	"background_game_over": {
+	"background_table": {
 		X:      1600,
 		Y:      400,
 		Width:  320,

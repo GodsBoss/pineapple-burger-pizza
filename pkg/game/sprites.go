@@ -20,7 +20,7 @@ func createSpriteMap(sourceImage *dom.Image) (canvas2drendering.SpriteMap, sprit
 
 	keys.backgroundTitle = addSprite("background_title")
 	keys.backgroundPlaying = addSprite("background_playing")
-	keys.backgroundGameOver = addSprite("background_game_over")
+	keys.backgroundTable = addSprite("background_table")
 
 	keys.pizzaGridOverlayFree = addSprite("pizza_grid_overlay_free")
 	keys.pizzaGridOverlayOccupied = addSprite("pizza_grid_overlay_occupied")
@@ -96,9 +96,9 @@ func createAddIngredientSprites(spriteMap canvas2drendering.SpriteMap) func(key 
 
 // spriteKeys holds the sprite keys generated when adding sprite specs to the spriteKeys factory.
 type spriteKeys struct {
-	backgroundTitle    r.SpriteKey
-	backgroundPlaying  r.SpriteKey
-	backgroundGameOver r.SpriteKey
+	backgroundTitle   r.SpriteKey
+	backgroundPlaying r.SpriteKey
+	backgroundTable   r.SpriteKey
 
 	pizzaGridOverlayFree     r.SpriteKey
 	pizzaGridOverlayOccupied r.SpriteKey

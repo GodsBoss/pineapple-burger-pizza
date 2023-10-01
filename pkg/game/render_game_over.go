@@ -8,7 +8,7 @@ import (
 func renderGameOver(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *textManager) stateRendererFunc {
 	return func(output *dom.Context2D, d *data, scale int) {
 		s := spriteMap.CreateSprite(
-			keys.backgroundGameOver,
+			keys.backgroundTable,
 			canvas2drendering.SpriteAttributes{},
 			0,
 			0,
