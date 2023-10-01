@@ -21,10 +21,6 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 		centerOffsetX := (160 - w*pizzaFieldWidth/2)
 		centerOffsetY := (100 - h*pizzaFieldHeight/2)
 
-		if pizzaKey, ok := keys.pizzas[d.pizza.Width()]; ok {
-			renderSprite(pizzaKey, centerOffsetX, centerOffsetY, 0)
-		}
-
 		renderPizza(renderSprite, keys, *d.pizza)
 		renderPlacedIngredients(renderSprite, keys, d.placedIngredients)
 
