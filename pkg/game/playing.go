@@ -52,24 +52,7 @@ func createReceiveMouseEventPlaying() func(d *data, event mouse.Event) game.Next
 	return func(d *data, event mouse.Event) game.NextState {
 		if mouse.IsPrimaryButtonEvent(event) && mouse.IsDownEvent(event) {
 			if d.draggedIngredient != nil && d.draggedIngredient.isValidPlacement() {
-				for _, field := range d.draggedIngredient.validFields {
-					d.pizza.grid[field.X()][field.Y()].occupied = true
-				}
-				for flavor, amount := range ingredientFlavors[d.draggedIngredient.typ] {
-					d.pizza.flavors[flavor] += amount
-				}
-				d.placedIngredients = append(
-					d.placedIngredients,
-					placedIngredient{
-						typ:         d.draggedIngredient.typ,
-						orientation: d.draggedIngredient.orientation,
-						x:           d.draggedIngredient.x,
-						y:           d.draggedIngredient.y,
-						width:       d.draggedIngredient.Width(),
-						height:      d.draggedIngredient.Height(),
-					},
-				)
-				d.draggedIngredient = nil
+				placeIngredient(d)
 				return game.SameState()
 			}
 
@@ -123,6 +106,27 @@ func createReceiveTickEventPlaying(gameOverState game.StateID) func(d *data, eve
 		}
 		return game.SameState()
 	}
+}
+
+func placeIngredient(d *data) {
+	for _, field := range d.draggedIngredient.validFields {
+		d.pizza.grid[field.X()][field.Y()].occupied = true
+	}
+	for flavor, amount := range ingredientFlavors[d.draggedIngredient.typ] {
+		d.pizza.flavors[flavor] += amount
+	}
+	d.placedIngredients = append(
+		d.placedIngredients,
+		placedIngredient{
+			typ:         d.draggedIngredient.typ,
+			orientation: d.draggedIngredient.orientation,
+			x:           d.draggedIngredient.x,
+			y:           d.draggedIngredient.y,
+			width:       d.draggedIngredient.Width(),
+			height:      d.draggedIngredient.Height(),
+		},
+	)
+	d.draggedIngredient = nil
 }
 
 func getNewOrder(d *data) {
