@@ -63,6 +63,7 @@ func customerExperiencesFlavors(d *data) {
 			d.reputation = 10
 		}
 		d.customer.mood = customerMoodHappy
+		d.customer.animation = animation.NewFrames(3, 300)
 	}
 	if rating < 0 { // Bad pizza.
 		d.customer.mood = customerMoodNormal

@@ -50,6 +50,7 @@ func renderPlaying(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *t
 				customerHeadKey = keys.customerHeadAngry
 			case customerMoodHappy:
 				customerHeadKey = keys.customerHeadHappy
+				customerAnimationFrame = d.customer.animation.Frame()
 			}
 		}
 		if d.customer.activity == customerEating {
