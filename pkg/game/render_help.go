@@ -30,7 +30,7 @@ func renderHelp(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *text
 		}
 
 		if d.helpText != "" {
-			renderText(1, 55, text.Lines(18, d.helpText))
+			renderText(1, 90, text.Lines(18, d.helpText))
 		}
 	}
 }
