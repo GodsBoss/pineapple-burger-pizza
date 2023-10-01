@@ -32,7 +32,8 @@ func New(img *dom.Image) *Game {
 
 	help.
 		SetInitHandler(initHelp).
-		SetKeyboardHandler(createReceiveKeyEventHelp(title.ID(), playing.ID()))
+		SetKeyboardHandler(createReceiveKeyEventHelp(title.ID(), playing.ID())).
+		SetMouseHandler(createReceiveMouseEventHelp())
 
 	playing.
 		SetInitHandler(initPlaying).

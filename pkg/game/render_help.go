@@ -3,6 +3,7 @@ package game
 import (
 	"github.com/GodsBoss/gggg/v2/pkg/dom"
 	"github.com/GodsBoss/gggg/v2/pkg/rendering/canvas2drendering"
+	"github.com/GodsBoss/pineapple-burger-pizza/pkg/text"
 )
 
 func renderHelp(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *textManager) stateRendererFunc {
@@ -19,5 +20,17 @@ func renderHelp(spriteMap canvas2drendering.SpriteMap, keys spriteKeys, tm *text
 		renderReputation(renderSprite, keys, d.reputation)
 		renderCustomerLikes(renderSprite, keys, renderText, d.customer.likes)
 		renderCustomerDislikes(renderSprite, keys, d.customer.dislikes)
+
+		for _, button := range d.helpButtons {
+			key := keys.helpIcon
+			if button.active {
+				key = keys.helpIconActive
+			}
+			renderSprite(key, button.x, button.y, 0)
+		}
+
+		if d.helpText != "" {
+			renderText(1, 55, text.Lines(18, d.helpText))
+		}
 	}
 }

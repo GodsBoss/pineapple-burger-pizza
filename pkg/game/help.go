@@ -2,6 +2,7 @@ package game
 
 import (
 	"github.com/GodsBoss/gggg/v2/pkg/event/keyboard"
+	"github.com/GodsBoss/gggg/v2/pkg/event/mouse"
 	"github.com/GodsBoss/gggg/v2/pkg/game"
 )
 
@@ -29,6 +30,14 @@ func initHelp(d *data) game.NextState {
 			flavorFish:  struct{}{},
 		},
 	}
+	d.helpText = ""
+	d.helpButtons = []helpButton{
+		{
+			id: "customer",
+			x:  48,
+			y:  32,
+		},
+	}
 
 	return game.SameState()
 }
@@ -45,4 +54,47 @@ func createReceiveKeyEventHelp(title game.StateID, playing game.StateID) func(d 
 
 		return game.SameState()
 	}
+}
+
+func createReceiveMouseEventHelp() func(d *data, event mouse.Event) game.NextState {
+	return func(d *data, event mouse.Event) game.NextState {
+		if mouse.IsPrimaryButtonEvent(event) && mouse.IsUpEvent(event) {
+			for i, button := range d.helpButtons {
+				if button.isInside(event.X, event.Y) {
+					currentButtonState := button.active
+					disableAllButtons(d.helpButtons)
+					d.helpButtons[i].active = !currentButtonState
+					d.helpText = ""
+					if d.helpButtons[i].active {
+						d.helpText = helpTexts[button.id]
+					}
+				}
+			}
+		}
+
+		return game.SameState()
+	}
+}
+
+func disableAllButtons(buttons []helpButton) {
+	for i := range buttons {
+		buttons[i].active = false
+	}
+}
+
+type helpButton struct {
+	id     helpButtonID
+	x      int
+	y      int
+	active bool
+}
+
+func (button helpButton) isInside(x, y int) bool {
+	return x >= button.x && x < button.x+16 && y >= button.y && y < button.y+16
+}
+
+type helpButtonID string
+
+var helpTexts = map[helpButtonID]string{
+	"customer": "The customer wants pizza. They like some things (to the left), they hate some things (to the right).\nClick on the customer to give the pizza to them.",
 }

@@ -31,4 +31,10 @@ type data struct {
 
 	// highscore is the highest score achieved.
 	highscore int
+
+	// helpButtons are the help buttons found on the help page.
+	helpButtons []helpButton
+
+	// helpText is the text shown as help.
+	helpText string
 }
