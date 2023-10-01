@@ -37,6 +37,11 @@ func initHelp(d *data) game.NextState {
 			x:  48,
 			y:  32,
 		},
+		{
+			id: "reputation",
+			x:  280,
+			y:  13,
+		},
 	}
 
 	return game.SameState()
@@ -96,5 +101,6 @@ func (button helpButton) isInside(x, y int) bool {
 type helpButtonID string
 
 var helpTexts = map[helpButtonID]string{
-	"customer": "The customer wants pizza. They like some things (to the left), they hate some things (to the right).\nClick on the customer to give the pizza to them.",
+	"customer":   "The customer wants pizza. They like some things (to the left), they hate some things (to the right).\nClick on the customer to give the pizza to them.",
+	"reputation": "Pizza that does not match the customer's expectations lowers your reputation. If you lose all your reputation, you'll get fired. Good pizza will raise your reputation.",
 }
