@@ -21,8 +21,8 @@ func (ingr waitingIngredient) inside(x int, y int) bool {
 type ingredientType string
 
 const (
-	ingredientAnchovi     ingredientType = "anchovy"
 	ingredientAnanas      ingredientType = "ananas"
+	ingredientAnchovi     ingredientType = "anchovy"
 	ingredientBurger      ingredientType = "burger"
 	ingredientRubberBoots ingredientType = "rubber_boots"
 )
@@ -58,16 +58,16 @@ var ingredientSizes = func(fieldsPerIngredientType map[ingredientType][]vector2d
 // This refers to the fields when in "up" orientation, so when ingredients are
 // rotated, the fields are rotated as well.
 var ingredientFields = map[ingredientType][]vector2d.Vector[int]{
-	ingredientAnchovi: []vector2d.Vector[int]{
-		vector2d.Cartesian[int](0, 0),
-		vector2d.Cartesian[int](1, 0),
-	},
 	ingredientAnanas: []vector2d.Vector[int]{
 		vector2d.Cartesian[int](0, 1),
 		vector2d.Cartesian[int](0, 2),
 		vector2d.Cartesian[int](1, 1),
 		vector2d.Cartesian[int](1, 2),
 		vector2d.Cartesian[int](2, 0),
+	},
+	ingredientAnchovi: []vector2d.Vector[int]{
+		vector2d.Cartesian[int](0, 0),
+		vector2d.Cartesian[int](1, 0),
 	},
 	ingredientRubberBoots: []vector2d.Vector[int]{
 		vector2d.Cartesian[int](0, 0),
