@@ -125,16 +125,16 @@ var spritesData = map[string]canvas2drendering.SpriteData{
 		Height: 32,
 	},
 	"burger_1": {
-		X:      0,
-		Y:      192,
-		Width:  60,
-		Height: 32,
-	},
-	"burger_2": {
 		X:      60,
 		Y:      176,
 		Width:  40,
 		Height: 48,
+	},
+	"burger_2": {
+		X:      0,
+		Y:      192,
+		Width:  60,
+		Height: 32,
 	},
 	"burger_3": {
 		X:      100,
